@@ -50,7 +50,13 @@ overflow-x: hidden;
     margin: 3%;
     padding: 2%;
 }
-
+/* Sticky */
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+  
 .activebtn{
     background-color: rgb(60,183,231) !important ;
     color: white !important;
@@ -92,7 +98,7 @@ ul {
     margin-bottom: 2%;
     padding: 3%;
     border-radius: 4px;
-    height: 75px;
+    height: 50px;
 }
 #SourceAccountList{
     margin-top: 2%;
@@ -158,6 +164,8 @@ button#backwordbtn {
  }
  .horizontalDesBtn{
     padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 10px;
  }
  .horizontalDesBtn,#forwordbtn,#backwordbtn{
     background-color: white;

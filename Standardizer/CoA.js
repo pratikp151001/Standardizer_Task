@@ -1,4 +1,28 @@
 $(document).ready(function () {
+
+  jQuery("#Searchbtn").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    jQuery("#DestinationAccountList div").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+  //   // When the user scrolls the page, execute myFunction
+  // window.onscroll = function() {myFunction()};
+
+  // // Get the navbar
+  // var navbar = document.getElementById("NavBar");
+
+  // // Get the offset position of the navbar
+  // var sticky = navbar.offsetTop;
+
+  // // Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
+  // function myFunction() {debugger
+  //   if (window.pageYOffset >= sticky) {
+  //     navbar.classList.add("sticky")
+  //   } else {
+  //     navbar.classList.remove("sticky");
+  //   }
+  // }
   //   var hackerList = new List('DestinationAccOunT', options);
   //   var options = {
   //     valueNames: [ 'Items']
@@ -53,19 +77,26 @@ $(document).ready(function () {
     // if(SourceAccountData[i].Type=="Assets")
     // list+=" <div class='dragableDiv'>"+SourceAccountData[i].Number+"</div>"
     list +=
-      "<div class='Item'> " +
+      "<div class='Item' id='" +
+      SourceAccountData[i].Number +
+      "'> " +
       SourceAccountData[i].Number +
       " " +
       SourceAccountData[i].Name +
       "<i class='fa-solid fa-clock-rotate-left history'></i> <i class='bi bi-check2-all doubleRight'></i></div>";
-    mostLickely += "<div class='Item'></div>";
-    likely += "<div class='Item'></div>";
-    possible += "<div class='Item'></div>";
+    mostLickely +=
+      "<div class='Item' id='" + SourceAccountData[i].Number + "ML'></div>";
+    likely +=
+      "<div class='Item'  id='" + SourceAccountData[i].Number + "L'></div>";
+    possible +=
+      "<div class='Item POSSIBLE' id='P" +
+      SourceAccountData[i].Number +
+      "' ></div>";
   }
   $("#SourceAccountList").html(list);
   $("#Mostlikely").html(mostLickely);
   $("#likely").html(likely);
-  $("#Possible").html(possible);
+  $("#possibleList").html(possible);
 
   destinationList = "";
   for (let j = 0; j < destinationData.length; j++) {
@@ -103,18 +134,28 @@ $(document).ready(function () {
   function DataSourceAccountDisplay(AccType) {
     //alert(AccType)
     list = "";
+    mostLickely = "";
+    likely = "";
+    possible = "";
     SourceData = SourceAccountData.filter(function (Data) {
       // debugger;
       if (Data.Type.toUpperCase() == AccType.toUpperCase()) {
         if (Data.Number == "") {
         } else {
           list += "<li class='Item'>" + Data.Number + "-" + Data.Name + "</li>";
-          console.log(Data);
+          mostLickely += "<div class='Item' id='" + Data.Number + "ML'></div>";
+          likely += "<div class='Item'  id='" + Data.Number + "L'></div>";
+          possible +=
+            "<div class='Item POSSIBLE' id='P" + Data.Number + "' ></div>";
+          // console.log(Data);
         }
       }
       return Data;
     });
     $("#SourceAccountList").html(list);
+    $("#Mostlikely").html(mostLickely);
+    $("#likely").html(likely);
+    $("#possibleList").html(possible);
   }
   function DataDestination(AccountType) {
     // alert(AccountType);
@@ -137,7 +178,7 @@ $(document).ready(function () {
             "-" +
             Data.AccountName +
             "</div>";
-          console.log(Data);
+          // console.log(Data);
         }
         return Data;
       }
@@ -145,13 +186,40 @@ $(document).ready(function () {
 
     $("#DestinationAccountList").html(destinationList);
   }
-    new Sortable(DestinationAccountList, {
-      group: {
-          name: 'shared',
-          pull: 'clone' // To clone: set pull to 'clone'
-      },
-      animation: 150
+  new Sortable(DestinationAccountList, {
+    group: {
+      name: "shared",
+      pull: "clone", // To clone: set pull to 'clone'
+    },
+    animation: 150,
   });
+
+  new Sortable(P1002, {
+    group: {
+      name: "shared",
+      pull: "clone", // To clone: set pull to 'clone'
+    },
+    animation: 150,
+  });
+  // var nestedSortables=$(".POSSIBLE")
+
+  // for (var i = 0; i < nestedSortables.length; i++) {
+  // 	new Sortable(nestedSortables[i], {
+  // 		group: 'nested',
+  // 		animation: 150,
+  // 		fallbackOnBody: true,
+  // 		swapThreshold: 0.65,
+  //   //   onSort: function (e) {
+  //   //     var items = e.to.children;
+  //   //     var result = [];
+  //   //     for (var i = 0; i < items.length; i++) {
+  //   //         result.push($(items[i]).data('id'));
+  //   //     }
+
+  //   //     $('#standard_order').val(result);
+  //   // }
+  // 	});
+  // }
 });
 
 //CSV to Json

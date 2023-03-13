@@ -5,42 +5,68 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <style>
-    #otherList{
-      float: right;
-    }
-  </style>
+  <style>#navbar {
+    overflow: hidden;
+    background-color: #333;
+  }
+  
+  /* Navbar links */
+  #navbar a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+  }
+  
+  /* Page content */
+  .content {
+    padding: 16px;
+  }
+  
+  /* The sticky class is added to the navbar with JS when it reaches its scroll position */
+  .sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+  .fsa{
+     height: 1000px;
+  }
+  
+  /* Add some top padding to the page content to prevent sudden quick movement (as the navigation bar gets a new position at the top of the page (position:fixed and top:0) */
+  .sticky + .content {
+    padding-top: 60px;
+  }</style>
 </head>
 <body>
-  <div class="d-flex">
-  <div id="favoriteList">
-    <li>Detroit Lions</li>
-    <li>Los Angeles Lakers</li>
-</div>
-<div id="otherList">
-    <li>Arizona Cardinals</li>
-    <li>Detroit Tigers</li>
-    <li>Detroit Red Wings</li>
-</div>
-</div>
-<!-- <script src="https://raw.githack.com/SortableJS/Sortable/master/Sortable.js"></script> -->
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js" integrity="sha512-Eezs+g9Lq4TCCq0wae01s9PuNWzHYoCMkE97e2qdkYthpI0pzC3UGB03lgEHn2XM85hDOUF6qgqqszs+iXU4UA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script>
-    let favoriteList = document.getElementById('favoriteList');
-let otherList = document.getElementById('otherList');
-let favorite_list = Sortable.create(favoriteList, {
-   animation: 150,
-   group: 'shared',
-   ghostClass: 'sortable-ghost',
-});
-new Sortable(otherList, {
-    group: {
-        name: 'shared',
-        pull: 'clone' // To clone: set pull to 'clone'
-    },
-    animation: 150
-});
-  </script>
+  <div id="navbar">
+    <a href="#home">Home</a>
+    <a href="#news">News</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="fsa">
+
+  </div>
 </body>
+<script>
+  // When the user scrolls the page, execute myFunction
+window.onscroll = function() {myFunction()};
+
+// Get the navbar
+var navbar = document.getElementById("navbar");
+
+// Get the offset position of the navbar
+var sticky = navbar.offsetTop;
+
+// Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
+function myFunction() {
+  if (window.pageYOffset >= sticky) {
+    navbar.classList.add("sticky")
+  } else {
+    navbar.classList.remove("sticky");
+  }
+}
+</script>
 </html>

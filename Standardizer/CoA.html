@@ -17,7 +17,7 @@
   </head>
   <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg ">
+    <nav class="navbar navbar-expand-lg " id="NavBar">
       <div class="container-fluid">
         <a class="navbar-brand ms-3" href="javascript:void(0)"><img
             id="companylogo" src="./assests/Standardizer_logo.png" alt=""></a>
@@ -51,17 +51,17 @@
         Expenses</button>
       <button type="button" class="btn accountTypebtn ms-2" data-val="other Rev
         & Exp">other Revenue and Expenses</button>
-      <button type="button" class="btn me-4" id="submitbtn">submit</button>
+      <button type="button" class="btn me-4" id="submitbtn">Submit</button>
     </div>
     <div class="humanUpdate mt-4"><b><i class="bi bi-circle"></b></i><b> Human
-        Update</b> </div>
+        Updated</b> </div>
 
     <div class="mainbody d-flex ms-3 container-fluid">
       <div class="columns mt-2">
         <div id="ScorceAccountTopheading"><b> Source Account Structure</b></div>
         <div id="headingSourceAccount" class="heading "> <span>Balance Sheet
             Account</span></div>
-        <ul id="SourceAccountList"></ul>
+        <div id="SourceAccountList"></div>
 
       </div>
       <div class="m-2 DropArea">
@@ -69,24 +69,24 @@
         <div class="d-flex container-fluid">
           <div class="Mlickely">
           <div id="headingMostlikely" class="heading"> <span>Most Likely</span></div>
-          <ul id="Mostlikely" class="ms-0"></ul>
+          <div id="Mostlikely" class="ms-0"></div>
           </div>
           <div class="Lickely">
           <div id="headinglikely" class="heading"> <span>Likely</span></div>
-          <ul id="likely">
+          <div id="likely">
 
-          </ul>
+          </div>
         </div>
         <div class="Possible">
           <div id="headingpossible" class="heading"> <span>Possible</span></div>
-          <ul id="Possible"></ul>
+          <div id="possibleList"></div>
         </div>
 
         </div>
       </div>
       <div class="columns m-2" id="DestinationAccOunT">
-        <div id="DestinationAccountTopheading"><b> Source Account Structure</b></div>
-        <div id="headingDestinationAccount" class="heading "> <span>Destination
+        <div id="DestinationAccountTopheading"><b> Destination Account Structure</b></div>
+        <div id="headingDestinationAccount" class="heading "> <span>Balance
             Sheet Account</span></div>
         <div class="Destinationbtns mt-2 mb-2">
           <div><button type="button" id="forwordbtn"><i class="bi
@@ -113,7 +113,7 @@
                 bi-chevron-right"></i></button></div>
         </div>
         <div class="searchBtn mt-2 mb-2">
-          <input type="search" id="Searchbtn" class="form-control"
+          <input type="text" id="Searchbtn" class="form-control"
             placeholder="Search Here">
         </div>
 
@@ -121,7 +121,6 @@
         </div>
       </div>
     </div>
-
     <script src="./jquery/jquery.js"></script>
     <script src="./js/bootstrap.min.js"></script>
     <!-- <script
