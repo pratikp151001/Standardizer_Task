@@ -15,6 +15,16 @@ overflow-x: hidden;
 .navbar{
     background-color: rgb(239,239,240);
 }
+.sticky {
+    position: sticky !important;
+    top: 0;
+    z-index: 99;
+  }
+  .stickyHeading{
+    position: sticky !important;
+    top: 75px;
+    z-index: 99;
+  }
 .navItemdiv {
     margin-left: 7%;
 }
@@ -70,6 +80,10 @@ overflow-x: hidden;
 .columns{
     width: 20%;
 }
+/* #DestinationAccOunT{
+    height: 500px !important;
+    overflow-y: scroll;
+} */
 
 .heading{
     font-weight: bold;
@@ -98,7 +112,8 @@ ul {
     margin-bottom: 2%;
     padding: 3%;
     border-radius: 4px;
-    height: 50px;
+    height: 40px;
+    overflow: hidden;
 }
 #SourceAccountList{
     margin-top: 2%;

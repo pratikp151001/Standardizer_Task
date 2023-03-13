@@ -6,31 +6,6 @@ $(document).ready(function () {
       $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
     });
   });
-  //   // When the user scrolls the page, execute myFunction
-  // window.onscroll = function() {myFunction()};
-
-  // // Get the navbar
-  // var navbar = document.getElementById("NavBar");
-
-  // // Get the offset position of the navbar
-  // var sticky = navbar.offsetTop;
-
-  // // Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
-  // function myFunction() {debugger
-  //   if (window.pageYOffset >= sticky) {
-  //     navbar.classList.add("sticky")
-  //   } else {
-  //     navbar.classList.remove("sticky");
-  //   }
-  // }
-  //   var hackerList = new List('DestinationAccOunT', options);
-  //   var options = {
-  //     valueNames: [ 'Items']
-  // };
-
-  // var monkeyList = new List('DestinationAccountList', {
-  //   valueNames: ['Item']
-  // });
 
   // dragula(
   //   [
@@ -132,6 +107,7 @@ $(document).ready(function () {
   });
 
   function DataSourceAccountDisplay(AccType) {
+    console.log(list)
     //alert(AccType)
     list = "";
     mostLickely = "";
@@ -197,7 +173,7 @@ $(document).ready(function () {
   new Sortable(P1002, {
     group: {
       name: "shared",
-      pull: "clone", // To clone: set pull to 'clone'
+      pull: "true", // To clone: set pull to 'clone'
     },
     animation: 150,
   });
