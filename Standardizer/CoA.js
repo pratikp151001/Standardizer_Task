@@ -8,17 +8,18 @@ $(document).ready(function () {
   //   valueNames: ['Item']
   // });
 
-  dragula(
-    [
-      document.querySelector("#DestinationAccountList"),
-      document.querySelector("#Possible"),
-    ],
-    {
-      copy: function (el, source) {
-        return source === document.querySelector("#DestinationAccountList");
-      },
-    }
-  );
+  // dragula(
+  //   [
+  //     document.querySelector("#DestinationAccountList"),
+  //     document.querySelector("#Possible"),
+  //   ],
+  //   {
+  //     copy: function (el, source) {
+  //       return source === document.querySelector("#DestinationAccountList");
+  //     },
+  //   }
+  // );
+  // $("#horizontalAll").trigger("click");
 
   //DEstinationData
   var destinationData;
@@ -46,34 +47,34 @@ $(document).ready(function () {
   //    //console.log(SourceAccountData)
   list = "";
   mostLickely = "";
-  lickely = "";
-  possible="";
+  likely = "";
+  possible = "";
   for (let i = 1; i < SourceAccountData.length; i++) {
     // if(SourceAccountData[i].Type=="Assets")
     // list+=" <div class='dragableDiv'>"+SourceAccountData[i].Number+"</div>"
     list +=
-      "<li class='Item'> " +
+      "<div class='Item'> " +
       SourceAccountData[i].Number +
       " " +
       SourceAccountData[i].Name +
-      "<i class='fa-solid fa-clock-rotate-left history'></i> <i class='bi bi-check2-all doubleRight'></i></li>";
-    mostLickely += "<li class='Item'>ghi 123</li>";
-    lickely += "<li class='Item'>def 256</li>";
-    possible += "<li class='Item'>abc 256</li>";
+      "<i class='fa-solid fa-clock-rotate-left history'></i> <i class='bi bi-check2-all doubleRight'></i></div>";
+    mostLickely += "<div class='Item'></div>";
+    likely += "<div class='Item'></div>";
+    possible += "<div class='Item'></div>";
   }
   $("#SourceAccountList").html(list);
   $("#Mostlikely").html(mostLickely);
-  $("#likely").html(lickely);
-  $("#Possible").html(possible)
+  $("#likely").html(likely);
+  $("#Possible").html(possible);
 
   destinationList = "";
   for (let j = 0; j < destinationData.length; j++) {
     destinationList +=
-      "<li class='Item'>⠿" +
+      "<div class='Item'>⠿" +
       destinationData[j].AccountCode +
       "-" +
       destinationData[j].AccountName +
-      "</li>";
+      "</div>";
   }
   $("#DestinationAccountList").html(destinationList);
 
@@ -105,10 +106,10 @@ $(document).ready(function () {
     SourceData = SourceAccountData.filter(function (Data) {
       // debugger;
       if (Data.Type.toUpperCase() == AccType.toUpperCase()) {
-        if(Data.Number==''){
-        }else{
-        list += "<li class='Item'>" + Data.Number + "-" + Data.Name + "</li>";
-        console.log(Data);
+        if (Data.Number == "") {
+        } else {
+          list += "<li class='Item'>" + Data.Number + "-" + Data.Name + "</li>";
+          console.log(Data);
         }
       }
       return Data;
@@ -116,26 +117,26 @@ $(document).ready(function () {
     $("#SourceAccountList").html(list);
   }
   function DataDestination(AccountType) {
-    //alert(AccountType)
+    // alert(AccountType);
     destinationList = "";
     ResultData = destinationData.filter(function (Data) {
-      if (AccountType == "All") {
+      if (AccountType == "ALL") {
         for (let j = 0; j < destinationData.length; j++) {
           destinationList +=
-            "<li class='Item'><i class='bi bi-three-dots-vertical'></i>" +
+            "<div class='Item'>⠿" +
             destinationData[j].AccountCode +
             "-" +
             destinationData[j].AccountName +
-            "</li>";
+            "</div>";
         }
       } else {
         if (Data.AccountTypeName == AccountType) {
           destinationList +=
-            "<li class='Item'>⠿" +
+            "<div class='Item'>⠿" +
             Data.AccountCode +
             "-" +
             Data.AccountName +
-            "</li>";
+            "</div>";
           console.log(Data);
         }
         return Data;
@@ -144,6 +145,13 @@ $(document).ready(function () {
 
     $("#DestinationAccountList").html(destinationList);
   }
+    new Sortable(DestinationAccountList, {
+      group: {
+          name: 'shared',
+          pull: 'clone' // To clone: set pull to 'clone'
+      },
+      animation: 150
+  });
 });
 
 //CSV to Json

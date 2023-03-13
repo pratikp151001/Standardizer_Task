@@ -5,36 +5,42 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.6.6/dragula.css"
-  integrity="sha512-gGkweS4I+MDqo1tLZtHl3Nu3PGY7TU8ldedRnu60fY6etWjQ/twRHRG2J92oDj7GDU2XvX8k6G5mbp0yCoyXCA=="
-  crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    #otherList{
+      float: right;
+    }
+  </style>
 </head>
 <body>
-  <div class="wrapper">
-    <div id="left" class="container">
-      <div>Item 1.</div>
-      <div>Item 2.</div>
-      <div>Item 3.</div>
-      <div>Item 4.</div>
-    </div>
-    <div id="right" class="container">
-      <div>Item 5.</div>
-      <div>Item 6.</div>
-      <div>Item 7.</div>
-    </div>
-  </div>
-
-  <script
-  src="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.6.6/dragula.min.js"
-  integrity="sha512-MrA7WH8h42LMq8GWxQGmWjrtalBjrfIzCQ+i2EZA26cZ7OBiBd/Uct5S3NP9IBqKx5b+MMNH1PhzTsk6J9nPQQ=="
-  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="./jquery/jquery.js"></script>
-  <script>
-$(document).ready(function(){
-  dragula([document.getElementById(left), document.getElementById(right)]);
-})
-  </script>
+  <div class="d-flex">
+  <div id="favoriteList">
+    <li>Detroit Lions</li>
+    <li>Los Angeles Lakers</li>
+</div>
+<div id="otherList">
+    <li>Arizona Cardinals</li>
+    <li>Detroit Tigers</li>
+    <li>Detroit Red Wings</li>
+</div>
+</div>
+<!-- <script src="https://raw.githack.com/SortableJS/Sortable/master/Sortable.js"></script> -->
   
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js" integrity="sha512-Eezs+g9Lq4TCCq0wae01s9PuNWzHYoCMkE97e2qdkYthpI0pzC3UGB03lgEHn2XM85hDOUF6qgqqszs+iXU4UA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script>
+    let favoriteList = document.getElementById('favoriteList');
+let otherList = document.getElementById('otherList');
+let favorite_list = Sortable.create(favoriteList, {
+   animation: 150,
+   group: 'shared',
+   ghostClass: 'sortable-ghost',
+});
+new Sortable(otherList, {
+    group: {
+        name: 'shared',
+        pull: 'clone' // To clone: set pull to 'clone'
+    },
+    animation: 150
+});
+  </script>
 </body>
 </html>
