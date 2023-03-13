@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Standardizer-CoA</title>
+    <link rel="stylesheet" href="CoAstyle.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.6.6/dragula.css"
+      integrity="sha512-gGkweS4I+MDqo1tLZtHl3Nu3PGY7TU8ldedRnu60fY6etWjQ/twRHRG2J92oDj7GDU2XvX8k6G5mbp0yCoyXCA=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg ">
+      <div class="container-fluid">
+        <a class="navbar-brand ms-3" href="javascript:void(0)"><img
+            id="companylogo" src="./assests/Standardizer_logo.png" alt=""></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+          data-bs-target="#navbarScroll" aria-controls="navbarScroll"
+          aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse navItemdiv" id="navbarScroll">
+          <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll "
+            style="--bs-scroll-height: 100px;">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">CoA</a>
+            </li>
+          </ul>
+          <form class="d-flex me-4">
+            <img src="./assests/user.jpg" alt="Profile Image" id="profileImage">
+            <!-- <button class="btn btn-outline-success" type="submit">Search</button> -->
+          </form>
+        </div>
+      </div>
+    </nav>
+    <div class="upperbuttons mt-4 ms-4 me-3">
+      <button type="button" class="btn accountTypebtn ms-2" data-val="Assets">Assets</button>
+      <button type="button" class="btn accountTypebtn ms-2"
+        data-val="Liabilities">Liability</button>
+      <button type="button" class="btn accountTypebtn ms-2" data-val="Equity">Equity/Capital</button>
+      <button type="button" class="btn accountTypebtn ms-2" data-val="Revenue">Revenue</button>
+      <button type="button" class="btn accountTypebtn ms-2" data-val="CoGS">CoGS</button>
+      <button type="button" class="btn accountTypebtn ms-2" data-val="Expense">G&A
+        Expenses</button>
+      <button type="button" class="btn accountTypebtn ms-2" data-val="other Rev
+        & Exp">other Revenue and Expenses</button>
+      <button type="button" class="btn me-4" id="submitbtn">submit</button>
+    </div>
+    <div class="humanUpdate mt-4"><b><i class="bi bi-circle"></b></i><b> Human
+        Update</b> </div>
+
+    <div class="mainbody d-flex ms-3 container-fluid">
+      <div class="columns mt-2">
+        <div id="ScorceAccountTopheading"><b> Source Account Structure</b></div>
+        <div id="headingSourceAccount" class="heading "> <span>Balance Sheet
+            Account</span></div>
+        <ul id="SourceAccountList"></ul>
+
+      </div>
+      <div class="m-2 DropArea">
+        <div id="MostlikelyTopheading"><b> Likely Destination Account</b></div>
+        <div class="d-flex container-fluid">
+          <div class="Mlickely">
+          <div id="headingMostlikely" class="heading"> <span>Most Likely</span></div>
+          <ul id="Mostlikely" class="ms-0"></ul>
+          </div>
+          <div class="Lickely">
+          <div id="headinglikely" class="heading"> <span>Likely</span></div>
+          <ul id="likely">
+
+          </ul>
+        </div>
+        <div class="Possible">
+          <div id="headingpossible" class="heading"> <span>Possible</span></div>
+          <ul id="Possible"></ul>
+        </div>
+
+        </div>
+      </div>
+      <div class="columns m-2" id="DestinationAccOunT">
+        <div id="DestinationAccountTopheading"><b> Source Account Structure</b></div>
+        <div id="headingDestinationAccount" class="heading "> <span>Destination
+            Sheet Account</span></div>
+        <div class="Destinationbtns mt-2 mb-2">
+          <div><button type="button" id="forwordbtn"><i class="bi
+                bi-chevron-left"></i></button></div>
+          <ul id="Desbuttonslist" class="DestinationbtnsLists me-0">
+            <li><button type="button" class="horizontalDesBtn" data-value="All"
+                id="horizontalAll">All</button></li>
+            <li><button type="button" class="horizontalDesBtn"
+                id="horizontalAssets" data-value="Assets">Assets</button></li>
+            <li><button type="button" class="horizontalDesBtn"
+                id="horizontalLiabilities" data-value="Liabilities">Liability</button></li>
+            <li><button type="button" class="horizontalDesBtn"
+                id="horizontalEquity" data-value="Equity/Capital">Equity/Capital</button></li>
+            <li><button type="button" class="horizontalDesBtn"
+                id="horizontalRevenue" data-value="Revenue">Revenue</button></li>
+            <li><button type="button" class="horizontalDesBtn"
+                id="horizontalCOGS" data-value="CoGS">CoGS</button></li>
+            <li><button type="button" class="horizontalDesBtn"
+                id="horizontalExpense" data-value="Expense">G&AExpenses</button></li>
+            <li><button type="button" class="horizontalDesBtn"
+                id="horizontalOther" data-value="other">OtherRevenue&Expenses</button></li>
+          </ul>
+          <div><button type="button" id="backwordbtn"><i class="bi
+                bi-chevron-right"></i></button></div>
+        </div>
+        <div class="searchBtn mt-2 mb-2">
+          <input type="search" id="Searchbtn" class="form-control"
+            placeholder="Search Here">
+        </div>
+
+        <ul id="DestinationAccountList">
+        </div>
+      </div>
+    </div>
+
+    <script src="./jquery/jquery.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.6.6/dragula.min.js"
+      integrity="sha512-MrA7WH8h42LMq8GWxQGmWjrtalBjrfIzCQ+i2EZA26cZ7OBiBd/Uct5S3NP9IBqKx5b+MMNH1PhzTsk6J9nPQQ=="
+      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.0.2/list.min.js" integrity="sha512-MT5YyrGWqMGkIbwkVUZEWGrRDjlNx8loukEdFyzLo4s8INKVxnDQy2eFcpmnWGrFwJ+X8mRTQOJpWCayXz7+Og==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+    <script src="./CoA.js"></script>
+  </body>
+</html>

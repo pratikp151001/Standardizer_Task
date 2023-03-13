@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.6.6/dragula.css"
+  integrity="sha512-gGkweS4I+MDqo1tLZtHl3Nu3PGY7TU8ldedRnu60fY6etWjQ/twRHRG2J92oDj7GDU2XvX8k6G5mbp0yCoyXCA=="
+  crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+  <div class="wrapper">
+    <div id="left" class="container">
+      <div>Item 1.</div>
+      <div>Item 2.</div>
+      <div>Item 3.</div>
+      <div>Item 4.</div>
+    </div>
+    <div id="right" class="container">
+      <div>Item 5.</div>
+      <div>Item 6.</div>
+      <div>Item 7.</div>
+    </div>
+  </div>
+
+  <script
+  src="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.6.6/dragula.min.js"
+  integrity="sha512-MrA7WH8h42LMq8GWxQGmWjrtalBjrfIzCQ+i2EZA26cZ7OBiBd/Uct5S3NP9IBqKx5b+MMNH1PhzTsk6J9nPQQ=="
+  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="./jquery/jquery.js"></script>
+  <script>
+$(document).ready(function(){
+  dragula([document.getElementById(left), document.getElementById(right)]);
+})
+  </script>
+  
+</body>
+</html>
