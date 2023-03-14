@@ -1,9 +1,8 @@
 $(document).ready(function () {
-
-  jQuery("#Searchbtn").on("keyup", function() {
+  jQuery("#Searchbtn").on("keyup", function () {
     var value = $(this).val().toLowerCase();
-    jQuery("#DestinationAccountList div").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    jQuery("#DestinationAccountList div").filter(function () {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
     });
   });
 
@@ -51,22 +50,38 @@ $(document).ready(function () {
   for (let i = 1; i < SourceAccountData.length; i++) {
     // if(SourceAccountData[i].Type=="Assets")
     // list+=" <div class='dragableDiv'>"+SourceAccountData[i].Number+"</div>"
-    list +=
-      "<div class='Item' id='" +
-      SourceAccountData[i].Number +
-      "'> " +
-      SourceAccountData[i].Number +
-      " " +
-      SourceAccountData[i].Name +
-      "<i class='fa-solid fa-clock-rotate-left history'></i> <i class='bi bi-check2-all doubleRight'></i></div>";
-    mostLickely +=
-      "<div class='Item' id='" + SourceAccountData[i].Number + "ML'></div>";
-    likely +=
-      "<div class='Item'  id='" + SourceAccountData[i].Number + "L'></div>";
-    possible +=
-      "<div class='Item POSSIBLE' id='P" +
-      SourceAccountData[i].Number +
-      "' ></div>";
+    if (SourceAccountData[i].Number != "") {
+      list +=
+        "<div class='Item SourceDATA' id='" +
+        SourceAccountData[i].Number +
+        "' data-type='" +
+        SourceAccountData[i].Type +
+        "'> " +
+        SourceAccountData[i].Number +
+        " " +
+        SourceAccountData[i].Name +
+        "<i class='fa-solid fa-clock-rotate-left history'></i> <i class='bi bi-check2-all doubleRight'></i></div>";
+      mostLickely +=
+        "<div class='Item Most_Likely' id='ML" +
+        SourceAccountData[i].Number +
+        "'></div>";
+      likely +=
+        "<div class='Item LIKELY'  id='L" +
+        SourceAccountData[i].Number +
+        "'></div>";
+      possible +=
+        "<div class='Item POSSIBLE' id='P" +
+        SourceAccountData[i].Number +
+        "' ></div>";
+
+      // new Sortable($(`#ML${SourceAccountData[i].Number}`), {
+      //   group: {
+      //     name: "shared",
+      //     pull: "true", // To clone: set pull to 'clone'
+      //   },
+      //   animation: 150,
+      // });
+    }
   }
   $("#SourceAccountList").html(list);
   $("#Mostlikely").html(mostLickely);
@@ -85,11 +100,14 @@ $(document).ready(function () {
   $("#DestinationAccountList").html(destinationList);
 
   $(".accountTypebtn").click(function () {
+    debugger;
     $(".accountTypebtn").removeClass("activebtn");
     $(this).addClass("activebtn");
     let ClickedBtn = $(this).data("val");
-    DataSourceAccountDisplay(ClickedBtn);
     $("#horizontal" + ClickedBtn + "").trigger("click");
+    $("#horizontal" + ClickedBtn + "").focus()
+    DataSourceAccountDisplay(ClickedBtn);
+    // $("#horizontal" + ClickedBtn + "").trigger("click");
   });
   $(".horizontalDesBtn").click(function () {
     $(".horizontalDesBtn").removeClass("activeHorizontalbtn");
@@ -107,31 +125,54 @@ $(document).ready(function () {
   });
 
   function DataSourceAccountDisplay(AccType) {
-    console.log(list)
-    //alert(AccType)
-    list = "";
-    mostLickely = "";
-    likely = "";
-    possible = "";
-    SourceData = SourceAccountData.filter(function (Data) {
-      // debugger;
-      if (Data.Type.toUpperCase() == AccType.toUpperCase()) {
-        if (Data.Number == "") {
-        } else {
-          list += "<li class='Item'>" + Data.Number + "-" + Data.Name + "</li>";
-          mostLickely += "<div class='Item' id='" + Data.Number + "ML'></div>";
-          likely += "<div class='Item'  id='" + Data.Number + "L'></div>";
-          possible +=
-            "<div class='Item POSSIBLE' id='P" + Data.Number + "' ></div>";
-          // console.log(Data);
-        }
+    // debugger
+    // console.log(SourceAccountData)
+    // for (let i = 0; i < SourceAccountData.length; i++) {
+    //   // var id = $(".SourceDATA")[i].id;
+
+    $.each($(".SourceDATA"), function (index) {
+      debugger
+      id = this.id;
+      $(`#${id}`).hide();
+      $(`#ML${id}`).hide();
+      $(`#L${id}`).hide();
+      $(`#P${id}`).hide();
+
+      // new Sortable(  $(`#P${id}`), {
+      //   group: {
+      //     name: "shared",
+      //     pull: "true", // To clone: set pull to 'clone'
+      //   },
+      //   animation: 150,
+      // });
+      if (
+        SourceAccountData[index].Type.toUpperCase() == AccType.toUpperCase()
+      ) {
+        // console.log("ascfa", SourceAccountData[i].Type.toUpperCase())
+        // console.log(AccType.toUpperCase())
+
+        // if (SourceAccountData[i].Number == "") {
+        // } else {
+        // var id = $(".SourceDATA")[i].id;
+        $(`#ML${id}`).show();
+        $(`#L${id}`).show();
+        $(`#P${id}`).show();
+        $(`#${id}`).show();
+        // }
+
+        // }
       }
-      return Data;
     });
-    $("#SourceAccountList").html(list);
-    $("#Mostlikely").html(mostLickely);
-    $("#likely").html(likely);
-    $("#possibleList").html(possible);
+    // var Most_LikelyId = $(".Most_Likely")[i].id;
+    // var LikelyId = $(".LIKELY")[i].id;
+
+    //  console.log(typeof(id))
+    //$('#'+id).show();
+
+    // $("#SourceAccountList").html(list);
+    // $("#Mostlikely").html(mostLickely);
+    // $("#likely").html(likely);
+    // $("#possibleList").html(possible);
   }
   function DataDestination(AccountType) {
     // alert(AccountType);
@@ -165,37 +206,31 @@ $(document).ready(function () {
   new Sortable(DestinationAccountList, {
     group: {
       name: "shared",
-      pull: "clone", // To clone: set pull to 'clone'
+      pull: "clone",
+      put: false, // To clone: set pull to 'clone'
     },
     animation: 150,
   });
 
-  new Sortable(P1002, {
+  new Sortable(possibleList, {
     group: {
       name: "shared",
       pull: "true", // To clone: set pull to 'clone'
     },
     animation: 150,
   });
-  // var nestedSortables=$(".POSSIBLE")
 
-  // for (var i = 0; i < nestedSortables.length; i++) {
-  // 	new Sortable(nestedSortables[i], {
-  // 		group: 'nested',
-  // 		animation: 150,
-  // 		fallbackOnBody: true,
-  // 		swapThreshold: 0.65,
-  //   //   onSort: function (e) {
-  //   //     var items = e.to.children;
-  //   //     var result = [];
-  //   //     for (var i = 0; i < items.length; i++) {
-  //   //         result.push($(items[i]).data('id'));
-  //   //     }
+  // $.each($('.POSSIBLE'), function (index) {
+  //   id = this.id;
 
-  //   //     $('#standard_order').val(result);
-  //   // }
-  // 	});
-  // }
+  //   new Sortable(id, {
+  //     group: {
+  //       name: "shared",
+  //       pull: "true", // To clone: set pull to 'clone'
+  //     },
+  //     animation: 150,
+  //   })
+  // })
 });
 
 //CSV to Json
