@@ -100,7 +100,7 @@ $(document).ready(function () {
   $("#DestinationAccountList").html(destinationList);
 
   $(".accountTypebtn").click(function () {
-    debugger;
+    
     $(".accountTypebtn").removeClass("activebtn");
     $(this).addClass("activebtn");
     let ClickedBtn = $(this).data("val");
@@ -130,13 +130,19 @@ $(document).ready(function () {
     // for (let i = 0; i < SourceAccountData.length; i++) {
     //   // var id = $(".SourceDATA")[i].id;
 
-    $.each($(".SourceDATA"), function (index) {
-      debugger
+    $.each($(".SourceDATA"), function () {
+      // debugger
+      
       id = this.id;
+      // console.log(id)
       $(`#${id}`).hide();
       $(`#ML${id}`).hide();
       $(`#L${id}`).hide();
       $(`#P${id}`).hide();
+
+      var Account_Type= $(`#${id}`).data('type')
+
+      
 
       // new Sortable(  $(`#P${id}`), {
       //   group: {
@@ -146,7 +152,7 @@ $(document).ready(function () {
       //   animation: 150,
       // });
       if (
-        SourceAccountData[index].Type.toUpperCase() == AccType.toUpperCase()
+        Account_Type.toUpperCase().trim() == AccType.toUpperCase().trim()
       ) {
         // console.log("ascfa", SourceAccountData[i].Type.toUpperCase())
         // console.log(AccType.toUpperCase())
@@ -175,9 +181,11 @@ $(document).ready(function () {
     // $("#possibleList").html(possible);
   }
   function DataDestination(AccountType) {
+    // debugger
     // alert(AccountType);
     destinationList = "";
     ResultData = destinationData.filter(function (Data) {
+      if(destinationData.AccountCode!=""){
       if (AccountType == "ALL") {
         for (let j = 0; j < destinationData.length; j++) {
           destinationList +=
@@ -188,7 +196,7 @@ $(document).ready(function () {
             "</div>";
         }
       } else {
-        if (Data.AccountTypeName == AccountType) {
+        if (Data.AccountTypeName.toUpperCase().includes(AccountType)){
           destinationList +=
             "<div class='Item'>⠿" +
             Data.AccountCode +
@@ -199,6 +207,7 @@ $(document).ready(function () {
         }
         return Data;
       }
+    }
     });
 
     $("#DestinationAccountList").html(destinationList);
@@ -210,27 +219,63 @@ $(document).ready(function () {
       put: false, // To clone: set pull to 'clone'
     },
     animation: 150,
+    sort:false
   });
 
-  new Sortable(possibleList, {
-    group: {
-      name: "shared",
-      pull: "true", // To clone: set pull to 'clone'
-    },
-    animation: 150,
-  });
+  // new Sortable(P1003, {
+  //   group: {
+  //     name: "shared",
+  //     pull: "true", // To clone: set pull to 'clone'
+  //   },
+  //   animation: 150,
+  // });
 
-  // $.each($('.POSSIBLE'), function (index) {
-  //   id = this.id;
+  $.each($('.POSSIBLE'), function () {
+    // id = "P"+this.id;
+    // console.log(typeof(id))
 
-  //   new Sortable(id, {
-  //     group: {
-  //       name: "shared",
-  //       pull: "true", // To clone: set pull to 'clone'
-  //     },
-  //     animation: 150,
-  //   })
-  // })
+    new Sortable(this, {
+      group: {
+        name: "shared",
+        put: function (to, from, dragEl, evt) {
+      // Remove any existing items in the droppable area
+      if (to.el.children.length > 0) {
+        to.el.removeChild(to.el.children[0]);
+      }
+      // Allow the item to be dropped
+      return true;
+    } // To clone: set pull to 'clone'
+      },
+      animation: 150,
+    
+    })
+  })
+  $.each($('.LIKELY'), function () {
+    // id = "P"+this.id;
+    // console.log(typeof(id))
+
+    new Sortable(this, {
+      group: {
+        name: "shared", 
+      },
+      animation: 150,
+    
+    })
+  })
+  $.each($('.Most_Likely  '), function () {
+    // id = "P"+this.id;
+    // console.log(typeof(id))
+
+    new Sortable(this, {
+      group: {
+        name: "shared", 
+      },
+      animation: 150,
+    
+    })
+  })
+
+  $("#ASSETSBTN").trigger('click')
 });
 
 //CSV to Json
@@ -247,8 +292,8 @@ function CSVtoJSON(csv) {
     }
 
     result.push(obj);
-    // console.log(result)
   }
+  // console.log(result)
   return result;
 }
 
