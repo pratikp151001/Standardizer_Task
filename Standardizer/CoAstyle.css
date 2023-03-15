@@ -177,6 +177,9 @@ ul {
 button#forwordbtn {
     padding-top: 5px;
 }
+.POSSIBLE{
+    margin-right: 4%;
+}
 button#backwordbtn {
     padding-top: 6px;
 }

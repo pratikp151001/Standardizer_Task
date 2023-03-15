@@ -100,12 +100,11 @@ $(document).ready(function () {
   $("#DestinationAccountList").html(destinationList);
 
   $(".accountTypebtn").click(function () {
-    
     $(".accountTypebtn").removeClass("activebtn");
     $(this).addClass("activebtn");
     let ClickedBtn = $(this).data("val");
     $("#horizontal" + ClickedBtn + "").trigger("click");
-    $("#horizontal" + ClickedBtn + "").focus()
+    $("#horizontal" + ClickedBtn + "").focus();
     DataSourceAccountDisplay(ClickedBtn);
     // $("#horizontal" + ClickedBtn + "").trigger("click");
   });
@@ -132,7 +131,7 @@ $(document).ready(function () {
 
     $.each($(".SourceDATA"), function () {
       // debugger
-      
+
       id = this.id;
       // console.log(id)
       $(`#${id}`).hide();
@@ -140,9 +139,7 @@ $(document).ready(function () {
       $(`#L${id}`).hide();
       $(`#P${id}`).hide();
 
-      var Account_Type= $(`#${id}`).data('type')
-
-      
+      var Account_Type = $(`#${id}`).data("type");
 
       // new Sortable(  $(`#P${id}`), {
       //   group: {
@@ -151,9 +148,7 @@ $(document).ready(function () {
       //   },
       //   animation: 150,
       // });
-      if (
-        Account_Type.toUpperCase().trim() == AccType.toUpperCase().trim()
-      ) {
+      if (Account_Type.toUpperCase().trim() == AccType.toUpperCase().trim()) {
         // console.log("ascfa", SourceAccountData[i].Type.toUpperCase())
         // console.log(AccType.toUpperCase())
 
@@ -185,29 +180,29 @@ $(document).ready(function () {
     // alert(AccountType);
     destinationList = "";
     ResultData = destinationData.filter(function (Data) {
-      if(destinationData.AccountCode!=""){
-      if (AccountType == "ALL") {
-        for (let j = 0; j < destinationData.length; j++) {
-          destinationList +=
-            "<div class='Item'>⠿" +
-            destinationData[j].AccountCode +
-            "-" +
-            destinationData[j].AccountName +
-            "</div>";
+      if (destinationData.AccountCode != "") {
+        if (AccountType == "ALL") {
+          for (let j = 0; j < destinationData.length; j++) {
+            destinationList +=
+              "<div class='Item'>⠿" +
+              destinationData[j].AccountCode +
+              "-" +
+              destinationData[j].AccountName +
+              "</div>";
+          }
+        } else {
+          if (Data.AccountTypeName.toUpperCase().includes(AccountType)) {
+            destinationList +=
+              "<div class='Item'>⠿" +
+              Data.AccountCode +
+              "-" +
+              Data.AccountName +
+              "</div>";
+            // console.log(Data);
+          }
+          return Data;
         }
-      } else {
-        if (Data.AccountTypeName.toUpperCase().includes(AccountType)){
-          destinationList +=
-            "<div class='Item'>⠿" +
-            Data.AccountCode +
-            "-" +
-            Data.AccountName +
-            "</div>";
-          // console.log(Data);
-        }
-        return Data;
       }
-    }
     });
 
     $("#DestinationAccountList").html(destinationList);
@@ -219,7 +214,7 @@ $(document).ready(function () {
       put: false, // To clone: set pull to 'clone'
     },
     animation: 150,
-    sort:false
+    sort: false,
   });
 
   // new Sortable(P1003, {
@@ -230,7 +225,7 @@ $(document).ready(function () {
   //   animation: 150,
   // });
 
-  $.each($('.POSSIBLE'), function () {
+  $.each($(".POSSIBLE"), function () {
     // id = "P"+this.id;
     // console.log(typeof(id))
 
@@ -238,44 +233,119 @@ $(document).ready(function () {
       group: {
         name: "shared",
         put: function (to, from, dragEl, evt) {
-      // Remove any existing items in the droppable area
-      if (to.el.children.length > 0) {
-        to.el.removeChild(to.el.children[0]);
-      }
-      // Allow the item to be dropped
-      return true;
-    } // To clone: set pull to 'clone'
+          // Remove any existing items in the droppable area
+          if (to.el.children.length > 0) {
+            to.el.removeChild(to.el.children[0]);
+          }
+
+          // Allow the item to be dropped
+          return true;
+        }, // To clone: set pull to 'clone'
       },
       animation: 150,
-    
-    })
-  })
-  $.each($('.LIKELY'), function () {
-    // id = "P"+this.id;
-    // console.log(typeof(id))
+    });
+  });
 
-    new Sortable(this, {
+  // $.each($('.LIKELY'), function () {
+  //   // id = "P"+this.id;
+  //   // console.log(typeof(id))
+
+  //   new Sortable(this, {
+  //     group: {
+  //       name: "shared",
+  //     },
+  //     animation: 150,
+
+  //   })
+  // })
+
+  var divs = document.querySelectorAll("div.Most_Likely");
+  divs.forEach(function (div) {
+    Sortable.create(div, {
       group: {
-        name: "shared", 
+        name: "shared",
+        put: function (to, from, dragEl, evt) {
+          // Remove any existing items in the droppable area
+          if (to.el.children.length > 0) {
+            to.el.removeChild(to.el.children[0]);
+          }
+          // Allow the item to be dropped
+          return true;
+        },
       },
       animation: 150,
-    
-    })
-  })
-  $.each($('.Most_Likely  '), function () {
-    // id = "P"+this.id;
-    // console.log(typeof(id))
+      ghostClass: "ghost",
+      // other Sortable.js options
+    });
+  });
 
-    new Sortable(this, {
+  //   secondDroppable=document.getElementById("P1003")
+  // Sortable.create(secondDroppable, {
+  //   group: {
+  //     name: 'unique-group',
+  //     put: false // Disable dropping in the second droppable area
+  //   }
+  // });
+
+  var oldItem;
+  var divs = document.querySelectorAll("div.LIKELY");
+  divs.forEach(function (div) {
+    // var divID=div.id
+
+    // var PossibledivID=divID.replace("L","P")
+    // console.log(PossibledivID)
+
+    // PossibleDIV=document.getElementById("PossibledivID")
+    Sortable.create(div, {
       group: {
-        name: "shared", 
+        name: "shared",
+        put: function (to, from, dragEl, evt) {
+          // Remove any existing items in the droppable area
+          if (to.el.children.length > 0) {
+            // Clone the existing item
+            oldItem = to.el.children[0].cloneNode(true);
+            console.log(oldItem);
+
+            // Remove the existing item from the droppable area
+            to.el.removeChild(to.el.children[0]);
+          }
+          // Allow the item to be dropped
+          return true;
+        },
       },
       animation: 150,
-    
-    })
+      ghostClass: "ghost",
+      // other Sortable.js options
+    });
+  });
+
+  // $.each($('.Most_Likely  '), function () {
+  //   // id = "P"+this.id;
+  //   // console.log(typeof(id))
+
+  //   new Sortable(this, {
+  //     group: {
+  //       name: "shared",
+  //     },
+  //     animation: 150,
+
+  //   })
+  // })
+
+
+  $(document).on('click','#submitbtn',function(){
+    var AccountChartDetails=new Array();
+    AccountChartDetails=JSON.parse(localStorage.getItem("Accountchart"))
+   if(AccountChartDetails==null)
+   {
+     for(let i=0;i<SourceAccountData.length;i++){
+      
+     }
+  
+   }
   })
 
-  $("#ASSETSBTN").trigger('click')
+  $("#ASSETSBTN").trigger("click");
 });
 
 //CSV to Json
