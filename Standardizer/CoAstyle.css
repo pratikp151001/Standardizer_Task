@@ -1,3 +1,17 @@
+#DestinationAccountList::-webkit-scrollbar {
+    width: 12px;               /* width of the entire scrollbar */
+  }
+  
+  #DestinationAccountList::-webkit-scrollbar-track {
+    background: white; 
+    width: 2px;       /* color of the tracking area */
+  }
+  
+  #DestinationAccountList::-webkit-scrollbar-thumb {
+    background-color: rgb(8, 84, 236);    /* color of the scroll thumb */
+    border-radius: 10px;      /* roundness of the scroll thumb */  /* creates padding around scroll thumb */
+  }
+
 body{
 overflow-x: hidden;
 }
@@ -158,10 +172,11 @@ ul {
 }
 #DestinationAccountList{
     height: auto;
-    /* overflow: hidden;
-    overflow-y: scroll; */
+    overflow: hidden;
+    overflow-y: scroll;
     padding: 0%;
 }
+
 .Possible,.Lickely,.Mlickely{
     width: 100%;
    max-width: 33%;
@@ -206,15 +221,18 @@ button#backwordbtn {
     background-color: white;
     border: none;
     font-weight: bold;
+    height: auto;
  }
  .Destinationbtns{
     border: 1px rgb(187, 184, 184) solid;
     position: relative;
     height: 45px;
  }
- .Destinationbtns #forwordbtn,.Destinationbtns #backwordbtn {
-    position:absolute;
- }
+ .Destinationbtns #forwordbtn, .Destinationbtns #backwordbtn {
+    position: absolute;
+    height: 38px;
+    width: 33px;
+}
  #backwordbtn {
     right: 0px;
     top: 0;

@@ -148,9 +148,11 @@ $(document).ready(function () {
         $(`#${id}`).show();
         // }
 
-        // }
       }
+      
+
     });
+  
     // var Most_LikelyId = $(".Most_Likely")[i].id;
     // var LikelyId = $(".LIKELY")[i].id;
 
@@ -161,6 +163,11 @@ $(document).ready(function () {
     // $("#Mostlikely").html(mostLickely);
     // $("#likely").html(likely);
     // $("#possibleList").html(possible);
+    debugger
+      var Sourceheight=document.getElementById('SourceAccountList')
+        Sourceheight=Sourceheight.offsetHeight
+        // alert(Sourceheight)
+        document.getElementById('DestinationAccountList').style.height=Sourceheight+"px"
   }
   function DataDestination(AccountType) {
     // debugger
@@ -382,6 +389,8 @@ $(document).ready(function () {
       $("#P" + AccountChartsData[i].id).html(AccountChartsData[i].Possible);
     }
   }
+
+  
 
   $("#ASSETSBTN").trigger("click");
 });
