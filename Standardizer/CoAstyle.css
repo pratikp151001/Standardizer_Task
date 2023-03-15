@@ -111,9 +111,16 @@ overflow-x: hidden;
 ul {
     list-style-type: none;
   }
+  .DESDATA{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis !important;
+  }
 .Item{
     border: 1px rgb(194, 191, 191) solid;
     margin-bottom: 2%;
+    /* width: 100%; */
+    max-width:100%;
     padding: 3%;
     border-radius: 4px;
     height: 40px;
@@ -154,6 +161,10 @@ ul {
     /* overflow: hidden;
     overflow-y: scroll; */
     padding: 0%;
+}
+.Possible,.Lickely,.Mlickely{
+    width: 100%;
+   max-width: 33%;
 }
 
 /* .DestinationbtnsLists{
@@ -220,9 +231,9 @@ button#backwordbtn {
     float:right;
     margin-right:3% ;
 }
-.Mlickely,.Lickely,.Possible{
+/* .Mlickely,.Lickely,.Possible{
     width: 100%;
-}
+} */
 #Mostlikely,#likely,#Possible{
     width: 95%;
     padding-left: 0% ;
