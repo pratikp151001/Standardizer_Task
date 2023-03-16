@@ -238,14 +238,13 @@ $(document).ready(function () {
     Sortable.create(div, {
       group: {
         name: "shared",
-        put: function (to, from, dragEl, evt) {
-          // Remove any existing items in the droppable area
-          if (to.el.children.length > 0) {
-            to.el.removeChild(to.el.children[0]);
-          }
-          // Allow the item to be dropped
-          return true;
         },
+        onAdd: function(evt) {
+          console.log(evt.to.children)
+          // posibleItem.classList.remove('mt-2', 'border','list-group-item','p-1'); 
+          if (evt.to.children.length >1) {
+            evt.to.removeChild(evt.to.children[1]);
+          }
       },
       animation: 150,
       ghostClass: "ghost",
@@ -279,37 +278,66 @@ $(document).ready(function () {
     Sortable.create(div, {
       group: {
         name: "shared",
-        put: function (to, from, dragEl, evt) {
-          // Remove any existing items in the droppable area
-          if (to.el.children.length > 0) {
-            var divID = div.id;
+        // put: function (to, from, dragEl, evt) {
+        //   // Remove any existing items in the droppable area
+        //   if (to.el.children.length > 0) {
+        //     var divID = div.id;
 
-            LikelydivID = divID.replace("ML", "L");
+        //     LikelydivID = divID.replace("ML", "L");
+        //     PossibledivID = divID.replace("ML", "P");
+        //     // console.log(PossibledivID);
+
+        //     LikelyDIV = document.getElementById(LikelydivID);
+        //     PossibleDIV = document.getElementById(PossibledivID);
+        //     MostLikelyOldItem = to.el.children[0].cloneNode(true);
+        //     // console.log(MostLikelyOldItem);
+
+        //     to.el.removeChild(to.el.children[0]);
+        //     LikelyDIV.appendChild(MostLikelyOldItem);
+        //     if (LikelyDIV.children.length > 1) {
+        //       LikelyOldItem = LikelyDIV.children[0].cloneNode(true);
+        //       console.log(LikelyOldItem);
+        //       PossibleDIV.appendChild(LikelyOldItem);
+        //       LikelyDIV.removeChild(LikelyDIV.children[0]);
+        //     }
+
+        //     if (PossibleDIV.children.length > 1) {
+        //       PossibleDIV.removeChild(PossibleDIV.children[0]);
+        //     }
+        //   }
+        //   // Allow the item to be dropped
+        //   return true;
+        // },
+        
+      },
+      onAdd: function(evt) {
+        // console.log(evt.to.children)
+        var divID = div.id;
+
+        LikelydivID = divID.replace("ML", "L");
+
             PossibledivID = divID.replace("ML", "P");
             // console.log(PossibledivID);
-
             LikelyDIV = document.getElementById(LikelydivID);
             PossibleDIV = document.getElementById(PossibledivID);
-            MostLikelyOldItem = to.el.children[0].cloneNode(true);
-            // console.log(MostLikelyOldItem);
+        if (evt.to.children.length >1) {
+          var oldMostLikelyitem=evt.to.children[1]
+          LikelyDIV.appendChild(oldMostLikelyitem);
+          console.log(LikelyDIV.children)
+          // evt.to.removeChild(evt.to.children[1]);
+        }
+        if (LikelyDIV.children.length > 1) {
+          var oldLikelyitem=LikelyDIV.children[0]
+          console.log(oldLikelyitem)
+          PossibleDIV.appendChild(oldLikelyitem);
+          // LikelyDIV.removeChild(LikelyDIV.children[1]);
+              }
+              if (PossibleDIV.children.length > 1) {
+               
+                PossibleDIV.removeChild(PossibleDIV.children[0]);
+                    }
 
-            to.el.removeChild(to.el.children[0]);
-            LikelyDIV.appendChild(MostLikelyOldItem);
-            if (LikelyDIV.children.length > 1) {
-              LikelyOldItem = LikelyDIV.children[0].cloneNode(true);
-              console.log(LikelyOldItem);
-              PossibleDIV.appendChild(LikelyOldItem);
-              LikelyDIV.removeChild(LikelyDIV.children[0]);
-            }
-
-            if (PossibleDIV.children.length > 1) {
-              PossibleDIV.removeChild(PossibleDIV.children[0]);
-            }
-          }
-          // Allow the item to be dropped
-          return true;
-        },
-      },
+    },
       animation: 150,
       ghostClass: "ghost",
       // other Sortable.js options
@@ -323,28 +351,46 @@ $(document).ready(function () {
     Sortable.create(div, {
       group: {
         name: "shared",
-        put: function (to, from, dragEl, evt) {
-          if (to.el.children.length > 0) {
-            // Clone the existing item
+        // put: function (to, from, dragEl, evt) {
+        //   if (to.el.children.length > 0) {
+        //     // Clone the existing item
 
-            var divID = div.id;
+        //     var divID = div.id;
+
+        //     PossibledivID = divID.replace("L", "P");
+        //     // console.log(PossibledivID);
+
+        //     PossibleDIV = document.getElementById(PossibledivID);
+        //     oldItem = to.el.children[0].cloneNode(true);
+        //     console.log(oldItem);
+
+        //     to.el.removeChild(to.el.children[0]);
+        //     PossibleDIV.appendChild(oldItem);
+        //     if (PossibleDIV.children.length > 1) {
+        //       PossibleDIV.removeChild(PossibleDIV.children[0]);
+        //     }
+        //   }
+        //   return true;
+        // },
+      },
+      onAdd: function(evt) {
+        console.log(evt.to.children)
+        var divID = div.id;
 
             PossibledivID = divID.replace("L", "P");
             // console.log(PossibledivID);
 
             PossibleDIV = document.getElementById(PossibledivID);
-            oldItem = to.el.children[0].cloneNode(true);
-            console.log(oldItem);
+        if (evt.to.children.length >1) {
+          var olditem=evt.to.children[1]
+          PossibleDIV.appendChild(olditem);
+          // evt.to.removeChild(evt.to.children[1]);
+        }
+        if (PossibleDIV.children.length > 1) {
+                PossibleDIV.removeChild(PossibleDIV.children[0]);
+              }
 
-            to.el.removeChild(to.el.children[0]);
-            PossibleDIV.appendChild(oldItem);
-            if (PossibleDIV.children.length > 1) {
-              PossibleDIV.removeChild(PossibleDIV.children[0]);
-            }
-          }
-          return true;
-        },
-      },
+    },
       animation: 150,
       ghostClass: "ghost",
       // other Sortable.js options
