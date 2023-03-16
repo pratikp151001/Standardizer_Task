@@ -175,9 +175,9 @@ $(document).ready(function () {
       if (destinationData.AccountCode != "") {
         if (AccountType == "ALL") {
           destinationList +=
-            "<div class='Item DESDATA' id='Source" +
+            "<div class='Item DESDATA' id='" +
             Data.AccountCode +
-            "' data-customID='Source" +
+            "' data-customID='" +
             Data.AccountCode +
             "'>⠿" +
             Data.AccountCode +
@@ -187,9 +187,9 @@ $(document).ready(function () {
         } else {
           if (Data.AccountTypeName.toUpperCase().includes(AccountType)) {
             destinationList +=
-              "<div class='Item DESDATA'id='Source" +
+              "<div class='Item DESDATA'id='" +
               Data.AccountCode +
-              "'data-customID='Source" +
+              "'data-customID='" +
               Data.AccountCode +
               "'>⠿" +
               Data.AccountCode +
@@ -244,35 +244,33 @@ $(document).ready(function () {
         name: "shared",
       },
       onAdd: function (evt) {
+        debugger
         // console.log(evt.dragEl)
         evt.to.children[0].classList.remove("Item");
-        // console.log(evt.to.children)
-        // evt.to.classList.remove("")
-        // var AlreadyPresentChildren
-        // if (evt.to.children.length >1) {
-        //  AlreadyPresentChildren=evt.to.children[1].id
-        // console.log(AlreadyPresentChildren)
-        // }
-        // var newAddedChildren = evt.item.attributes;
-        // console.log(newAddedChildren);
+
         if (evt.to.children.length > 1) {
-          //   debugger
-          //   console.log(evt.to.children)
-          
           var AlreadyPresentChildren = evt.to.children[1];
-          console.log($(AlreadyPresentChildren).data('customid'))
-          // console.log($("#"+AlreadyPresentChildren).attr("data-customid"));
-          var AlreadyPresentChildrenID=$(AlreadyPresentChildren).data('customid')
-          var newAddedChildren=evt.item
-         
-          console.log( $(newAddedChildren).attr("data-customid"))
-          var newAddedChildrenID=$(newAddedChildren).attr("data-customid")
-          // console.log(AlreadyPresentChildren)
-          // console.log(newAddedChildren)
-          if(newAddedChildrenID==AlreadyPresentChildrenID){
-            Swal.fire("Duplicate Account")
-          }
-          else{
+          var AlreadyPresentChildrenID = $(AlreadyPresentChildren).data("customid");
+          var newAddedChildren = evt.item;
+          var PossibleDivID=div.id
+          var LikelyDivID = PossibleDivID.replace("P", "L");
+          var LikelyDiv=document.getElementById(LikelyDivID)
+          var LikelyDivChildren=LikelyDiv.children[0]
+          var LikelyDivChildrenID=$(LikelyDivChildren).data("customid")
+          // console.log(LikelyChildren.children)
+          console.log(LikelyDivChildrenID)
+
+          var MOSTLikelyDivID=PossibleDivID.replace("P", "ML");
+          var MOSTLikelyDiv=document.getElementById(MOSTLikelyDivID)
+          var MOSTLikelyDivChildren=MOSTLikelyDiv.children[0]
+          var MOSTLikelyDivChildrenID=$(MOSTLikelyDivChildren).data("customid")
+
+          var newAddedChildrenID = $(newAddedChildren).attr("data-customid");
+          if (newAddedChildrenID == AlreadyPresentChildrenID || newAddedChildrenID==LikelyDivChildrenID ||newAddedChildrenID==MOSTLikelyDivChildrenID ) {
+            Swal.fire("Duplicate Account");
+            evt.to.removeChild(evt.to.children[0]);
+          } else {
+            console.log("WDFEWFVRVRF")
             evt.to.removeChild(evt.to.children[1]);
           }
         }
@@ -282,7 +280,7 @@ $(document).ready(function () {
       // other Sortable.js options
     });
   });
-  // console.log(P1002.children)
+  console.log(P1002.children)
 
   // $.each($(".POSSIBLE"), function () {
   //   // id = "P"+this.id;
@@ -384,9 +382,19 @@ $(document).ready(function () {
 
         PossibleDIV = document.getElementById(PossibledivID);
         if (evt.to.children.length > 1) {
+          var AlreadyPresentChildren = evt.to.children[1];
+          var AlreadyPresentChildrenID = $(AlreadyPresentChildren).data("customid");
+          var newAddedChildren = evt.item;
+          var newAddedChildrenID = $(newAddedChildren).attr("data-customid");
+          if(AlreadyPresentChildrenID==newAddedChildrenID){
+            Swal.fire("Duplicate Account")
+            evt.to.removeChild(evt.to.children[0]);
+          }
+          else{
           var olditem = evt.to.children[1];
           PossibleDIV.appendChild(olditem);
           // evt.to.removeChild(evt.to.children[1]);
+          }
         }
         if (PossibleDIV.children.length > 1) {
           PossibleDIV.removeChild(PossibleDIV.children[0]);
@@ -396,7 +404,6 @@ $(document).ready(function () {
       ghostClass: "ghost",
       // other Sortable.js options
     });
-   
   });
 
   $(document).on("click", "#submitbtn", function () {
