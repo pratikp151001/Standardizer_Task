@@ -175,23 +175,23 @@ $(document).ready(function () {
       if (destinationData.AccountCode != "") {
         if (AccountType == "ALL") {
           destinationList +=
-            "<div class='Item DESDATA'><p id='" +
+            "<div class='Item DESDATA' id='Source" +
             Data.AccountCode +
             "'>⠿" +
             Data.AccountCode +
             "-" +
             Data.AccountName +
-            "</p></div>";
+            "</div>";
         } else {
           if (Data.AccountTypeName.toUpperCase().includes(AccountType)) {
             destinationList +=
-              "<div class='Item DESDATA' ><p id='" +
+              "<div class='Item DESDATA'id='Source" +
               Data.AccountCode +
-              "'>⠿" +
+              "' >⠿" +
               Data.AccountCode +
               "-" +
               Data.AccountName +
-              "</p></div>";
+              "</div>";
             // console.log(Data);
           }
           return Data;
@@ -240,10 +240,28 @@ $(document).ready(function () {
         name: "shared",
         },
         onAdd: function(evt) {
-          console.log(evt.to.children)
-          // posibleItem.classList.remove('mt-2', 'border','list-group-item','p-1'); 
+          evt.to.children[0].classList.remove("Item")
+          // console.log(evt.to.children)
+          // evt.to.classList.remove("")
+          // var AlreadyPresentChildren=evt.to.children[0].id
+          // console.log(AlreadyPresentChildren)
+          // var newAddedChildren=evt.item.id
+          // console.log(newAddedChildren)
           if (evt.to.children.length >1) {
+          //   console.log(evt.to.children)
+          //   var AlreadyPresentChildren=evt.to.children[1].id
+          // console.log(AlreadyPresentChildren)
+          // var newAddedChildren=evt.to.children[0].id
+          // console.log(newAddedChildren)
+            // console.log(evt.to.children[0].id)
+            // console.log(evt.to.children[1].id)
+            // if(AlreadyPresentChildren==newAddedChildren){
+            //   Swal.fire("Duplicate Account")
+            // }
+            // else{
+              console.log("ELse")
             evt.to.removeChild(evt.to.children[1]);
+            // }
           }
       },
       animation: 150,
@@ -311,6 +329,8 @@ $(document).ready(function () {
         
       },
       onAdd: function(evt) {
+        // var mostLikelyItem = evt.to.children[0];
+        evt.to.children[0].classList.remove("Item")
         // console.log(evt.to.children)
         var divID = div.id;
 
@@ -374,7 +394,8 @@ $(document).ready(function () {
         // },
       },
       onAdd: function(evt) {
-        console.log(evt.to.children)
+        // console.log(evt.to.children)
+        evt.to.children[0].classList.remove("Item")
         var divID = div.id;
 
             PossibledivID = divID.replace("L", "P");
@@ -382,6 +403,7 @@ $(document).ready(function () {
 
             PossibleDIV = document.getElementById(PossibledivID);
         if (evt.to.children.length >1) {
+         
           var olditem=evt.to.children[1]
           PossibleDIV.appendChild(olditem);
           // evt.to.removeChild(evt.to.children[1]);
@@ -444,6 +466,9 @@ $(document).ready(function () {
       "AccountChartData",
       JSON.stringify(AccountChartDetails)
     );
+
+    DATE=getFormattedDate()
+     $("#lastUpdate").text("Last Updated on"+DATE)
   });
 
   //  Get Data From Local Storage
@@ -462,6 +487,19 @@ $(document).ready(function () {
         $("#P" + AccountChartsData[i].id).html(AccountChartsData[i].Possible);
       }
     }
+  }
+
+  function getFormattedDate() {
+    date=new Date()
+    var year = date.getFullYear();
+  
+    var month = (1 + date.getMonth()).toString();
+    month = month.length > 1 ? month : '0' + month;
+  
+    var day = date.getDate().toString();
+    day = day.length > 1 ? day : '0' + day;
+    
+    return month + '-' + day + '-' + year;
   }
 
   $("#ASSETSBTN").trigger("click");

@@ -45,8 +45,12 @@
     <button type="button" class="btn accountTypebtn ms-2" data-val="COGS">CoGS</button>
     <button type="button" class="btn accountTypebtn ms-2" data-val="Expense">G&A
       Expenses</button>
-    <button type="button" class="btn accountTypebtn ms-2" data-val="Other Rev & Exp">Other Revenue and Expenses</button>
-    <button type="button" class="btn me-4" id="submitbtn">Submit</button>
+    <button type="button" class="btn accountTypebtn ms-2" data-val="Other">Other Revenue and Expenses</button>
+    <div class="SubmitButton me-4">
+    <button type="button" class="btn" id="submitbtn">Submit</button>
+    <br>
+    <small id="lastUpdate"></small>
+  </div>
   </div>
   <div class="humanUpdate mt-4"><b><i class="bi bi-circle"></b></i><b> Human
       Updated</b> </div>
@@ -119,6 +123,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"
     integrity="sha512-Eezs+g9Lq4TCCq0wae01s9PuNWzHYoCMkE97e2qdkYthpI0pzC3UGB03lgEHn2XM85hDOUF6qgqqszs+iXU4UA=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="./CoA.js"></script>
 </body>
 
