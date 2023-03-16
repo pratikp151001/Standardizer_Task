@@ -147,12 +147,9 @@ $(document).ready(function () {
         $(`#P${id}`).show();
         $(`#${id}`).show();
         // }
-
       }
-      
-
     });
-  
+
     // var Most_LikelyId = $(".Most_Likely")[i].id;
     // var LikelyId = $(".LIKELY")[i].id;
 
@@ -163,11 +160,12 @@ $(document).ready(function () {
     // $("#Mostlikely").html(mostLickely);
     // $("#likely").html(likely);
     // $("#possibleList").html(possible);
-    debugger
-      var Sourceheight=document.getElementById('SourceAccountList')
-        Sourceheight=Sourceheight.offsetHeight
-        // alert(Sourceheight)
-        document.getElementById('DestinationAccountList').style.height=Sourceheight+"px"
+    // debugger
+    var Sourceheight = document.getElementById("SourceAccountList");
+    Sourceheight = Sourceheight.offsetHeight;
+    // alert(Sourceheight)
+    document.getElementById("DestinationAccountList").style.height =
+      Sourceheight + "px";
   }
   function DataDestination(AccountType) {
     // debugger
@@ -176,18 +174,20 @@ $(document).ready(function () {
     ResultData = destinationData.filter(function (Data) {
       if (destinationData.AccountCode != "") {
         if (AccountType == "ALL") {
-          
-            destinationList +=
-              "<div class='Item DESDATA'><p id='"+Data.AccountCode+"'>⠿" +
-              Data.AccountCode +
-              "-" +
-              Data.AccountName +
-              "</p></div>";
-          
+          destinationList +=
+            "<div class='Item DESDATA'><p id='" +
+            Data.AccountCode +
+            "'>⠿" +
+            Data.AccountCode +
+            "-" +
+            Data.AccountName +
+            "</p></div>";
         } else {
           if (Data.AccountTypeName.toUpperCase().includes(AccountType)) {
             destinationList +=
-              "<div class='Item DESDATA' ><p id='"+Data.AccountCode+"'>⠿" +
+              "<div class='Item DESDATA' ><p id='" +
+              Data.AccountCode +
+              "'>⠿" +
               Data.AccountCode +
               "-" +
               Data.AccountName +
@@ -218,40 +218,40 @@ $(document).ready(function () {
   //   },
   //   animation: 150,
   // });
-  var divs = document.querySelectorAll(".DESDATA");
-  divs.forEach(function (div) {
-    debugger
-    console.log(div)
-    Sortable.create(div, {
-      group: {
-        name: "shared",
-        pull: "clone",
-      },
-      animation: 150,
-      // other Sortable.js options
-    });
-  });
-  
-
-  // var divs = document.querySelectorAll("div.POSSIBLE");
+  // var divs = document.querySelectorAll("#DestinationAccountList div.DESDATA");
+  // console.log(divs)
   // divs.forEach(function (div) {
+  //   debugger
+  //   console.log(div)
   //   Sortable.create(div, {
   //     group: {
   //       name: "shared",
-  //       put: function (to, from, dragEl, evt) {
-  //         // Remove any existing items in the droppable area
-  //         if (to.el.children.length > 0) {
-  //           to.el.removeChild(to.el.children[0]);
-  //         }
-  //         // Allow the item to be dropped
-  //         return true;
-  //       },
+  //       pull: "clone",
   //     },
   //     animation: 150,
-  //     ghostClass: "ghost",
   //     // other Sortable.js options
   //   });
   // });
+
+  var divs = document.querySelectorAll("div.POSSIBLE");
+  divs.forEach(function (div) {
+    Sortable.create(div, {
+      group: {
+        name: "shared",
+        put: function (to, from, dragEl, evt) {
+          // Remove any existing items in the droppable area
+          if (to.el.children.length > 0) {
+            to.el.removeChild(to.el.children[0]);
+          }
+          // Allow the item to be dropped
+          return true;
+        },
+      },
+      animation: 150,
+      ghostClass: "ghost",
+      // other Sortable.js options
+    });
+  });
 
   // $.each($(".POSSIBLE"), function () {
   //   // id = "P"+this.id;
@@ -282,7 +282,29 @@ $(document).ready(function () {
         put: function (to, from, dragEl, evt) {
           // Remove any existing items in the droppable area
           if (to.el.children.length > 0) {
+            var divID = div.id;
+
+            LikelydivID = divID.replace("ML", "L");
+            PossibledivID = divID.replace("ML", "P");
+            // console.log(PossibledivID);
+
+            LikelyDIV = document.getElementById(LikelydivID);
+            PossibleDIV = document.getElementById(PossibledivID);
+            MostLikelyOldItem = to.el.children[0].cloneNode(true);
+            // console.log(MostLikelyOldItem);
+
             to.el.removeChild(to.el.children[0]);
+            LikelyDIV.appendChild(MostLikelyOldItem);
+            if (LikelyDIV.children.length > 1) {
+              LikelyOldItem = LikelyDIV.children[0].cloneNode(true);
+              console.log(LikelyOldItem);
+              PossibleDIV.appendChild(LikelyOldItem);
+              LikelyDIV.removeChild(LikelyDIV.children[0]);
+            }
+
+            if (PossibleDIV.children.length > 1) {
+              PossibleDIV.removeChild(PossibleDIV.children[0]);
+            }
           }
           // Allow the item to be dropped
           return true;
@@ -294,16 +316,8 @@ $(document).ready(function () {
     });
   });
 
-  var oldItem;
   var divs = document.querySelectorAll("div.LIKELY");
   divs.forEach(function (div) {
-    // debugger;
-    var divID = div.id;
-
-    var PossibledivID = divID.replace("L", "P");
-    // console.log(PossibledivID);
-
-    PossibleDIV = document.getElementById(PossibledivID);
     // console.log(PossibleDIV);
 
     Sortable.create(div, {
@@ -312,29 +326,21 @@ $(document).ready(function () {
         put: function (to, from, dragEl, evt) {
           if (to.el.children.length > 0) {
             // Clone the existing item
-            oldItem = to.el.children[0].cloneNode(true);
-            // console.log(oldItem);
 
-            to.el.removeChild(to.el.children[0]);
-          }
-          return true;
-        },
-      },
-      animation: 150,
-      ghostClass: "ghost",
-      // other Sortable.js options
-    });
+            var divID = div.id;
 
-    Sortable.create(PossibleDIV, {
-      group: {
-        name: "shared",
-        put: function (to, from, dragEl, evt) {
-          if (to.el.children.length > 0) {
-            // Clone the existing item
+            PossibledivID = divID.replace("L", "P");
+            // console.log(PossibledivID);
+
+            PossibleDIV = document.getElementById(PossibledivID);
             oldItem = to.el.children[0].cloneNode(true);
             console.log(oldItem);
 
             to.el.removeChild(to.el.children[0]);
+            PossibleDIV.appendChild(oldItem);
+            if (PossibleDIV.children.length > 1) {
+              PossibleDIV.removeChild(PossibleDIV.children[0]);
+            }
           }
           return true;
         },
@@ -343,6 +349,24 @@ $(document).ready(function () {
       ghostClass: "ghost",
       // other Sortable.js options
     });
+    // Sortable.create(PossibleDIV, {
+    //   group: {
+    //     name: "shared",
+    //     put: function (to, from, dragEl, evt) {
+    //       if (to.el.children.length > 0) {
+    //         // Clone the existing item
+    //         oldItem = to.el.children[0].cloneNode(true);
+    //         console.log(oldItem);
+
+    //         to.el.removeChild(to.el.children[0]);
+    //       }
+    //       return true;
+    //     },
+    //   },
+    //   animation: 150,
+    //   ghostClass: "ghost",
+    //   // other Sortable.js options
+    // });
   });
 
   // $.each($('.Most_Likely  '), function () {
@@ -378,19 +402,21 @@ $(document).ready(function () {
 
   //  Get Data From Local Storage
   var AccountChartsData = JSON.parse(localStorage.getItem("AccountChartData"));
-  for (let i = 0; i < AccountChartsData.length; i++) {
-    if (
-      AccountChartsData[i].Lickely != "" ||
-      AccountChartsData[i].MostLickely != "" ||
-      AccountChartsData[i].Possible != ""
-    ) {
-      $("#ML" + AccountChartsData[i].id).html(AccountChartsData[i].MostLickely);
-      $("#L" + AccountChartsData[i].id).html(AccountChartsData[i].Lickely);
-      $("#P" + AccountChartsData[i].id).html(AccountChartsData[i].Possible);
+  if (AccountChartsData) {
+    for (let i = 0; i < AccountChartsData.length; i++) {
+      if (
+        AccountChartsData[i].Lickely != "" ||
+        AccountChartsData[i].MostLickely != "" ||
+        AccountChartsData[i].Possible != ""
+      ) {
+        $("#ML" + AccountChartsData[i].id).html(
+          AccountChartsData[i].MostLickely
+        );
+        $("#L" + AccountChartsData[i].id).html(AccountChartsData[i].Lickely);
+        $("#P" + AccountChartsData[i].id).html(AccountChartsData[i].Possible);
+      }
     }
   }
-
-  
 
   $("#ASSETSBTN").trigger("click");
 });
