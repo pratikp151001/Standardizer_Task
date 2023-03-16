@@ -177,6 +177,8 @@ $(document).ready(function () {
           destinationList +=
             "<div class='Item DESDATA' id='Source" +
             Data.AccountCode +
+            "' data-customID='Source" +
+            Data.AccountCode +
             "'>⠿" +
             Data.AccountCode +
             "-" +
@@ -187,7 +189,9 @@ $(document).ready(function () {
             destinationList +=
               "<div class='Item DESDATA'id='Source" +
               Data.AccountCode +
-              "' >⠿" +
+              "'data-customID='Source" +
+              Data.AccountCode +
+              "'>⠿" +
               Data.AccountCode +
               "-" +
               Data.AccountName +
@@ -238,37 +242,47 @@ $(document).ready(function () {
     Sortable.create(div, {
       group: {
         name: "shared",
-        },
-        onAdd: function(evt) {
-          evt.to.children[0].classList.remove("Item")
-          // console.log(evt.to.children)
-          // evt.to.classList.remove("")
-          // var AlreadyPresentChildren=evt.to.children[0].id
-          // console.log(AlreadyPresentChildren)
-          // var newAddedChildren=evt.item.id
-          // console.log(newAddedChildren)
-          if (evt.to.children.length >1) {
+      },
+      onAdd: function (evt) {
+        // console.log(evt.dragEl)
+        evt.to.children[0].classList.remove("Item");
+        // console.log(evt.to.children)
+        // evt.to.classList.remove("")
+        // var AlreadyPresentChildren
+        // if (evt.to.children.length >1) {
+        //  AlreadyPresentChildren=evt.to.children[1].id
+        // console.log(AlreadyPresentChildren)
+        // }
+        // var newAddedChildren = evt.item.attributes;
+        // console.log(newAddedChildren);
+        if (evt.to.children.length > 1) {
+          //   debugger
           //   console.log(evt.to.children)
-          //   var AlreadyPresentChildren=evt.to.children[1].id
+          
+          var AlreadyPresentChildren = evt.to.children[1];
+          console.log($(AlreadyPresentChildren).data('customid'))
+          // console.log($("#"+AlreadyPresentChildren).attr("data-customid"));
+          var AlreadyPresentChildrenID=$(AlreadyPresentChildren).data('customid')
+          var newAddedChildren=evt.item
+         
+          console.log( $(newAddedChildren).attr("data-customid"))
+          var newAddedChildrenID=$(newAddedChildren).attr("data-customid")
           // console.log(AlreadyPresentChildren)
-          // var newAddedChildren=evt.to.children[0].id
           // console.log(newAddedChildren)
-            // console.log(evt.to.children[0].id)
-            // console.log(evt.to.children[1].id)
-            // if(AlreadyPresentChildren==newAddedChildren){
-            //   Swal.fire("Duplicate Account")
-            // }
-            // else{
-              console.log("ELse")
-            evt.to.removeChild(evt.to.children[1]);
-            // }
+          if(newAddedChildrenID==AlreadyPresentChildrenID){
+            Swal.fire("Duplicate Account")
           }
+          else{
+            evt.to.removeChild(evt.to.children[1]);
+          }
+        }
       },
       animation: 150,
-      ghostClass: "ghost",
+      // ghostClass: "ghost",
       // other Sortable.js options
     });
   });
+  // console.log(P1002.children)
 
   // $.each($(".POSSIBLE"), function () {
   //   // id = "P"+this.id;
@@ -296,68 +310,35 @@ $(document).ready(function () {
     Sortable.create(div, {
       group: {
         name: "shared",
-        // put: function (to, from, dragEl, evt) {
-        //   // Remove any existing items in the droppable area
-        //   if (to.el.children.length > 0) {
-        //     var divID = div.id;
-
-        //     LikelydivID = divID.replace("ML", "L");
-        //     PossibledivID = divID.replace("ML", "P");
-        //     // console.log(PossibledivID);
-
-        //     LikelyDIV = document.getElementById(LikelydivID);
-        //     PossibleDIV = document.getElementById(PossibledivID);
-        //     MostLikelyOldItem = to.el.children[0].cloneNode(true);
-        //     // console.log(MostLikelyOldItem);
-
-        //     to.el.removeChild(to.el.children[0]);
-        //     LikelyDIV.appendChild(MostLikelyOldItem);
-        //     if (LikelyDIV.children.length > 1) {
-        //       LikelyOldItem = LikelyDIV.children[0].cloneNode(true);
-        //       console.log(LikelyOldItem);
-        //       PossibleDIV.appendChild(LikelyOldItem);
-        //       LikelyDIV.removeChild(LikelyDIV.children[0]);
-        //     }
-
-        //     if (PossibleDIV.children.length > 1) {
-        //       PossibleDIV.removeChild(PossibleDIV.children[0]);
-        //     }
-        //   }
-        //   // Allow the item to be dropped
-        //   return true;
-        // },
-        
       },
-      onAdd: function(evt) {
+      onAdd: function (evt) {
         // var mostLikelyItem = evt.to.children[0];
-        evt.to.children[0].classList.remove("Item")
+        evt.to.children[0].classList.remove("Item");
         // console.log(evt.to.children)
         var divID = div.id;
 
         LikelydivID = divID.replace("ML", "L");
 
-            PossibledivID = divID.replace("ML", "P");
-            // console.log(PossibledivID);
-            LikelyDIV = document.getElementById(LikelydivID);
-            PossibleDIV = document.getElementById(PossibledivID);
-        if (evt.to.children.length >1) {
-          var oldMostLikelyitem=evt.to.children[1]
+        PossibledivID = divID.replace("ML", "P");
+        // console.log(PossibledivID);
+        LikelyDIV = document.getElementById(LikelydivID);
+        PossibleDIV = document.getElementById(PossibledivID);
+        if (evt.to.children.length > 1) {
+          var oldMostLikelyitem = evt.to.children[1];
           LikelyDIV.appendChild(oldMostLikelyitem);
-          console.log(LikelyDIV.children)
+          console.log(LikelyDIV.children);
           // evt.to.removeChild(evt.to.children[1]);
         }
         if (LikelyDIV.children.length > 1) {
-          var oldLikelyitem=LikelyDIV.children[0]
-          console.log(oldLikelyitem)
+          var oldLikelyitem = LikelyDIV.children[0];
+          console.log(oldLikelyitem);
           PossibleDIV.appendChild(oldLikelyitem);
           // LikelyDIV.removeChild(LikelyDIV.children[1]);
-              }
-              if (PossibleDIV.children.length > 1) {
-               
-                PossibleDIV.removeChild(PossibleDIV.children[0]);
-                    }
-
-    },
+        }
+        if (PossibleDIV.children.length > 1) {
+          PossibleDIV.removeChild(PossibleDIV.children[0]);
+        }
+      },
       animation: 150,
       ghostClass: "ghost",
       // other Sortable.js options
@@ -393,62 +374,30 @@ $(document).ready(function () {
         //   return true;
         // },
       },
-      onAdd: function(evt) {
+      onAdd: function (evt) {
         // console.log(evt.to.children)
-        evt.to.children[0].classList.remove("Item")
+        evt.to.children[0].classList.remove("Item");
         var divID = div.id;
 
-            PossibledivID = divID.replace("L", "P");
-            // console.log(PossibledivID);
+        PossibledivID = divID.replace("L", "P");
+        // console.log(PossibledivID);
 
-            PossibleDIV = document.getElementById(PossibledivID);
-        if (evt.to.children.length >1) {
-         
-          var olditem=evt.to.children[1]
+        PossibleDIV = document.getElementById(PossibledivID);
+        if (evt.to.children.length > 1) {
+          var olditem = evt.to.children[1];
           PossibleDIV.appendChild(olditem);
           // evt.to.removeChild(evt.to.children[1]);
         }
         if (PossibleDIV.children.length > 1) {
-                PossibleDIV.removeChild(PossibleDIV.children[0]);
-              }
-
-    },
+          PossibleDIV.removeChild(PossibleDIV.children[0]);
+        }
+      },
       animation: 150,
       ghostClass: "ghost",
       // other Sortable.js options
     });
-    // Sortable.create(PossibleDIV, {
-    //   group: {
-    //     name: "shared",
-    //     put: function (to, from, dragEl, evt) {
-    //       if (to.el.children.length > 0) {
-    //         // Clone the existing item
-    //         oldItem = to.el.children[0].cloneNode(true);
-    //         console.log(oldItem);
-
-    //         to.el.removeChild(to.el.children[0]);
-    //       }
-    //       return true;
-    //     },
-    //   },
-    //   animation: 150,
-    //   ghostClass: "ghost",
-    //   // other Sortable.js options
-    // });
+   
   });
-
-  // $.each($('.Most_Likely  '), function () {
-  //   // id = "P"+this.id;
-  //   // console.log(typeof(id))
-
-  //   new Sortable(this, {
-  //     group: {
-  //       name: "shared",
-  //     },
-  //     animation: 150,
-
-  //   })
-  // })
 
   $(document).on("click", "#submitbtn", function () {
     var AccountChartDetails = new Array();
@@ -467,8 +416,8 @@ $(document).ready(function () {
       JSON.stringify(AccountChartDetails)
     );
 
-    DATE=getFormattedDate()
-     $("#lastUpdate").text("Last Updated on"+DATE)
+    DATE = getFormattedDate();
+    $("#lastUpdate").text("Last Updated on" + DATE);
   });
 
   //  Get Data From Local Storage
@@ -490,16 +439,30 @@ $(document).ready(function () {
   }
 
   function getFormattedDate() {
-    date=new Date()
+    date = new Date();
     var year = date.getFullYear();
-  
+
     var month = (1 + date.getMonth()).toString();
-    month = month.length > 1 ? month : '0' + month;
-  
+    month = month.length > 1 ? month : "0" + month;
+
     var day = date.getDate().toString();
-    day = day.length > 1 ? day : '0' + day;
-    
-    return month + '-' + day + '-' + year;
+    day = day.length > 1 ? day : "0" + day;
+
+    var time = parseInt(date.getHours());
+    var minutes = date.getMinutes();
+    var ampm;
+    if (time > 12) {
+      ampm = "pm";
+      time = time - 12;
+    } else {
+      ampm = "am";
+    }
+
+    console.log(time, minutes, ampm);
+
+    return (
+      month + "-" + day + "-" + year + " at " + time + ":" + minutes + ampm
+    );
   }
 
   $("#ASSETSBTN").trigger("click");

@@ -54,10 +54,14 @@ overflow-x: hidden;
     background-color: rgb(13, 143, 13);
     color: white;
     padding: 7px 30px;
-    /* float: right; */
+    float: right;
 }
 
 .SubmitButton{
+    float: right;
+}
+
+#lastUpdate{
     float: right;
 }
 #SourceAccountColumn{
