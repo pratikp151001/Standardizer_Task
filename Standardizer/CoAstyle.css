@@ -54,7 +54,7 @@ overflow-x: hidden;
     box-shadow:  2px 2px 5px rgb(218, 218, 218);;
 }
 .sourceNameNumber{
-    width: 80%;
+    width: 70%;
     white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -73,6 +73,7 @@ overflow-x: hidden;
 
 #lastUpdate{
     float: right;
+    font-size: small;
 }
 #SourceAccountColumn{
     width: 25%;
@@ -185,7 +186,6 @@ ul {
 .Possible,.Lickely,.Mlickely{
     width: 100%;
    max-width: 33%;
-   padding: 0% 1%;
 }
 .Mlickely{
 max-width: 34%;
@@ -201,6 +201,7 @@ max-width: 34%;
     display: flex;
     height: auto;
 }
+
 /* #forwordbtn{
     position: absolute;
     right: 25.5%;
@@ -246,6 +247,9 @@ button#backwordbtn {
     right: 0px;
     top: 0;
 }
+.icons{
+    width: 25%;
+}
 
  .activeHorizontalbtn{
     color: #0d9d66;
@@ -253,6 +257,7 @@ button#backwordbtn {
  }
  .history{
     float: right;
+    
  }
  .doubleRight{
     float:right;
