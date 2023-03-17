@@ -168,7 +168,9 @@ $(document).ready(function () {
     // alert(AccountType);
     destinationList = "";
     ResultData = destinationData.filter(function (Data) {
-      if (destinationData.AccountCode != "") {
+      if (Data.AccountCode == "") {}
+      else{
+        // debugger
         if (AccountType == "ALL") {
           destinationList +=
             "<div class='Item DESDATA' id='" +
@@ -241,6 +243,8 @@ $(document).ready(function () {
       },
       onAdd: function (evt) {
 
+        console.log(evt.from)
+
         evt.to.children[0].classList.remove("Item");
 
         var newAddedChildren = evt.item;
@@ -250,7 +254,7 @@ $(document).ready(function () {
           var LikelyDivChildren=LikelyDiv.children[0]
           var LikelyDivChildrenID=$(LikelyDivChildren).data("customid")
           // console.log(LikelyChildren.children)
-          console.log(LikelyDivChildrenID)
+          // console.log(LikelyDivChildrenID)
 
           var MOSTLikelyDivID=PossibleDivID.replace("P", "ML");
           var MOSTLikelyDiv=document.getElementById(MOSTLikelyDivID)
@@ -313,6 +317,7 @@ $(document).ready(function () {
         name: "shared",
       },
       onAdd: function (evt) {
+        console.log(evt.from)
         // var mostLikelyItem = evt.to.children[0];
         evt.to.children[0].classList.remove("Item");
         // console.log(evt.to.children)
