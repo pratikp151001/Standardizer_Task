@@ -43,11 +43,11 @@ $(document).ready(function () {
         SourceAccountData[i].Number +
         "' data-type='" +
         SourceAccountData[i].Type +
-        "'> " +
+        "'> <div class='sourceNameNumber'>" +
         SourceAccountData[i].Number +
         " " +
         SourceAccountData[i].Name +
-        "<i class='fa-solid fa-clock-rotate-left history'></i> <i class='bi bi-check2-all doubleRight'></i></div>";
+        "</div><div class='icons'><i class='fa-solid fa-clock-rotate-left history'></i> <i class='bi bi-check2-all doubleRight'></i></div></div>";
       mostLickely +=
         "<div class='Item Most_Likely' id='ML" +
         SourceAccountData[i].Number +
@@ -111,12 +111,8 @@ $(document).ready(function () {
   });
 
   function DataSourceAccountDisplay(AccType) {
-    // debugger
-    // console.log(SourceAccountData)
-    // for (let i = 0; i < SourceAccountData.length; i++) {
-    //   // var id = $(".SourceDATA")[i].id;
-
     $.each($(".SourceDATA"), function () {
+      debugger
       // debugger
 
       id = this.id;
@@ -270,7 +266,7 @@ $(document).ready(function () {
             Swal.fire("Duplicate Account");
             evt.to.removeChild(evt.to.children[0]);
           } else {
-            console.log("WDFEWFVRVRF")
+            // console.log("WDFEWFVRVRF")
             evt.to.removeChild(evt.to.children[1]);
           }
         }
