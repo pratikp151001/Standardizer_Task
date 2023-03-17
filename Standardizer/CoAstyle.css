@@ -302,3 +302,9 @@ button#backwordbtn {
     height: 50px;
     border-radius: 10px;
 }
+
+
+/* modal */
+#AccountNameAndNumber{
+    color: rgb(57, 192, 246);
+}

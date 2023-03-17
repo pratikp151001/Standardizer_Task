@@ -47,7 +47,9 @@ $(document).ready(function () {
         SourceAccountData[i].Number +
         " " +
         SourceAccountData[i].Name +
-        "</div><div class='icons'><i class='fa-solid fa-clock-rotate-left history ms-2 mt-1' data-sourceAccountNumber='"+SourceAccountData[i].Number +"'></i> <i class='bi bi-check2-all doubleRight ms-2'></i></div></div>";
+        "</div><div class='icons'><i class='fa-solid fa-clock-rotate-left history ms-2 mt-1' data-sourceAccountNumber='" +
+        SourceAccountData[i].Number +
+        "'></i> <i class='bi bi-check2-all doubleRight ms-2'></i></div></div>";
       mostLickely +=
         "<div class='Item Most_Likely' id='ML" +
         SourceAccountData[i].Number +
@@ -168,8 +170,8 @@ $(document).ready(function () {
     // alert(AccountType);
     destinationList = "";
     ResultData = destinationData.filter(function (Data) {
-      if (Data.AccountCode == "") {}
-      else{
+      if (Data.AccountCode == "") {
+      } else {
         // debugger
         if (AccountType == "ALL") {
           destinationList +=
@@ -242,45 +244,64 @@ $(document).ready(function () {
         name: "shared",
       },
       onAdd: function (evt) {
-
-        console.log(evt.from)
-
         evt.to.children[0].classList.remove("Item");
 
+        console.log(evt.from);
+
         var newAddedChildren = evt.item;
-          var PossibleDivID=div.id
-          var LikelyDivID = PossibleDivID.replace("P", "L");
-          var LikelyDiv=document.getElementById(LikelyDivID)
-          var LikelyDivChildren=LikelyDiv.children[0]
-          var LikelyDivChildrenID=$(LikelyDivChildren).data("customid")
-          // console.log(LikelyChildren.children)
-          // console.log(LikelyDivChildrenID)
+        var PossibleDivID = div.id;
+        var LikelyDivID = PossibleDivID.replace("P", "L");
+        var LikelyDiv = document.getElementById(LikelyDivID);
+        var LikelyDivChildren = LikelyDiv.children[0];
+        var LikelyDivChildrenID = $(LikelyDivChildren).data("customid");
+        // console.log(LikelyChildren.children)
+        // console.log(LikelyDivChildrenID)
 
-          var MOSTLikelyDivID=PossibleDivID.replace("P", "ML");
-          var MOSTLikelyDiv=document.getElementById(MOSTLikelyDivID)
-          var MOSTLikelyDivChildren=MOSTLikelyDiv.children[0]
-          var MOSTLikelyDivChildrenID=$(MOSTLikelyDivChildren).data("customid")
+        var MOSTLikelyDivID = PossibleDivID.replace("P", "ML");
+        var MOSTLikelyDiv = document.getElementById(MOSTLikelyDivID);
+        var MOSTLikelyDivChildren = MOSTLikelyDiv.children[0];
+        var MOSTLikelyDivChildrenID = $(MOSTLikelyDivChildren).data("customid");
 
-          var newAddedChildrenID = $(newAddedChildren).attr("data-customid");
+        var newAddedChildrenID = $(newAddedChildren).attr("data-customid");
         // console.log(evt.dragEl)
-       if(newAddedChildrenID==LikelyDivChildrenID ||newAddedChildrenID==MOSTLikelyDivChildrenID){
-        Swal.fire("Duplicate Account");
-        evt.to.removeChild(evt.to.children[0]);
-       }
-       else{
-        if (evt.to.children.length > 1) {
-          var AlreadyPresentChildren = evt.to.children[1];
-          var AlreadyPresentChildrenID = $(AlreadyPresentChildren).data("customid");
-          
-          if (newAddedChildrenID == AlreadyPresentChildrenID ) {
-            Swal.fire("Duplicate Account");
-            evt.to.removeChild(evt.to.children[0]);
-          } else {
-            // console.log("WDFEWFVRVRF")
-            evt.to.removeChild(evt.to.children[1]);
+
+        var Fromitem = $(evt.from).attr("class");
+        var FromitemID = evt.from.id;
+        var FromitemDiv = document.getElementById(FromitemID);
+        if (FromitemID != "DestinationAccountList") {
+          if (Fromitem.includes("LIKELY")) {
+            Swal.fire("Can't move in other column");
+            FromitemDiv.appendChild(evt.to.children[0]);
+            // evt.to.removeChild(evt.to.children[0]);
+          }
+          if (Fromitem.includes("Most_Likely")) {
+            Swal.fire("Can't move in other column");
+            FromitemDiv.appendChild(evt.to.children[0]);
+            // evt.to.removeChild(evt.to.children[0]);
           }
         }
-      }
+        if (
+          newAddedChildrenID == LikelyDivChildrenID ||
+          newAddedChildrenID == MOSTLikelyDivChildrenID
+        ) {
+          Swal.fire("Duplicate Account");
+          evt.to.removeChild(evt.to.children[0]);
+        } else {
+          if (evt.to.children.length > 1) {
+            var AlreadyPresentChildren = evt.to.children[1];
+            var AlreadyPresentChildrenID = $(AlreadyPresentChildren).data(
+              "customid"
+            );
+
+            if (newAddedChildrenID == AlreadyPresentChildrenID) {
+              Swal.fire("Duplicate Account");
+              evt.to.removeChild(evt.to.children[0]);
+            } else {
+              // console.log("WDFEWFVRVRF")
+              evt.to.removeChild(evt.to.children[1]);
+            }
+          }
+        }
       },
       animation: 150,
       // ghostClass: "ghost",
@@ -317,7 +338,7 @@ $(document).ready(function () {
         name: "shared",
       },
       onAdd: function (evt) {
-        console.log(evt.from)
+        console.log(evt.from);
         // var mostLikelyItem = evt.to.children[0];
         evt.to.children[0].classList.remove("Item");
         // console.log(evt.to.children)
@@ -331,35 +352,56 @@ $(document).ready(function () {
         PossibleDIV = document.getElementById(PossibledivID);
 
         var newAddedChildren = evt.item;
-          var newAddedChildrenID = $(newAddedChildren).attr("data-customid");
-          // console.log(newAddedChildrenID)
+        var newAddedChildrenID = $(newAddedChildren).attr("data-customid");
+        // console.log(newAddedChildrenID)
 
-          var LikelyDivChildren=LikelyDIV.children[0]
-          var LikelyDivChildrenID=$(LikelyDivChildren).data("customid")
+        var LikelyDivChildren = LikelyDIV.children[0];
+        var LikelyDivChildrenID = $(LikelyDivChildren).data("customid");
 
-          var PossibleDivChildren=PossibleDIV.children[0]
-          var PossibleDivChildrenID=$(PossibleDivChildren).data("customid")
-        if(newAddedChildrenID==LikelyDivChildrenID || newAddedChildrenID==PossibleDivChildrenID ){
-          Swal.fire("Duplicate Acoount")
-          evt.to.removeChild(evt.to.children[0]);
-        }
-        else{
-        if (evt.to.children.length > 1) {
-          var AlreadyPresentChildren = evt.to.children[1];
-          var AlreadyPresentChildrenID = $(AlreadyPresentChildren).data("customid");
-          // console.log(AlreadyPresentChildrenID)
-          
-          if(AlreadyPresentChildrenID==newAddedChildrenID ){
-            Swal.fire("Duplicate Acoount")
-            evt.to.removeChild(evt.to.children[0]);
-          }else{
-          var oldMostLikelyitem = evt.to.children[1];
-          LikelyDIV.appendChild(oldMostLikelyitem);
-          // console.log(LikelyDIV.children);
-          // evt.to.removeChild(evt.to.children[1]);
+        var PossibleDivChildren = PossibleDIV.children[0];
+        var PossibleDivChildrenID = $(PossibleDivChildren).data("customid");
+
+        var Fromitem = $(evt.from).attr("class");
+        var FromitemID = evt.from.id;
+        var FromitemDiv = document.getElementById(FromitemID);
+        if (FromitemID != "DestinationAccountList") {
+          if (Fromitem.includes("LIKELY")) {
+            Swal.fire("Can't move in other column");
+            FromitemDiv.appendChild(evt.to.children[0]);
+            // evt.to.removeChild(evt.to.children[0]);
+          }
+
+          if (Fromitem.includes("POSSIBLE")) {
+            Swal.fire("Can't move in other column");
+            FromitemDiv.appendChild(evt.to.children[0]);
+            // evt.to.removeChild(evt.to.children[0]);
           }
         }
-      }
+        if (
+          newAddedChildrenID == LikelyDivChildrenID ||
+          newAddedChildrenID == PossibleDivChildrenID
+        ) {
+          Swal.fire("Duplicate Acoount");
+          evt.to.removeChild(evt.to.children[0]);
+        } else {
+          if (evt.to.children.length > 1) {
+            var AlreadyPresentChildren = evt.to.children[1];
+            var AlreadyPresentChildrenID = $(AlreadyPresentChildren).data(
+              "customid"
+            );
+            // console.log(AlreadyPresentChildrenID)
+
+            if (AlreadyPresentChildrenID == newAddedChildrenID) {
+              Swal.fire("Duplicate Acoount");
+              evt.to.removeChild(evt.to.children[0]);
+            } else {
+              var oldMostLikelyitem = evt.to.children[1];
+              LikelyDIV.appendChild(oldMostLikelyitem);
+              // console.log(LikelyDIV.children);
+              // evt.to.removeChild(evt.to.children[1]);
+            }
+          }
+        }
         if (LikelyDIV.children.length > 1) {
           var oldLikelyitem = LikelyDIV.children[0];
           console.log(oldLikelyitem);
@@ -392,42 +434,56 @@ $(document).ready(function () {
         PossibledivID = divID.replace("L", "P");
         MostLikelydivID = divID.replace("L", "ML");
         PossibleDIV = document.getElementById(PossibledivID);
-        MostLikelyDIV=document.getElementById(MostLikelydivID)
+        MostLikelyDIV = document.getElementById(MostLikelydivID);
         // console.log(PossibledivID);
-        var PossibleDivChildren=PossibleDIV.children[0]
-          var PossibleDivChildrenID=$(PossibleDivChildren).data("customid")
+        var PossibleDivChildren = PossibleDIV.children[0];
+        var PossibleDivChildrenID = $(PossibleDivChildren).data("customid");
 
-          var MostLikelyDivChildren=MostLikelyDIV.children[0]
-          var MostLikelyDivChildrenID=$(MostLikelyDivChildren).data("customid")
+        var MostLikelyDivChildren = MostLikelyDIV.children[0];
+        var MostLikelyDivChildrenID = $(MostLikelyDivChildren).data("customid");
 
-          var newAddedChildren = evt.item;
-          var newAddedChildrenID = $(newAddedChildren).attr("data-customid");
+        var newAddedChildren = evt.item;
+        var newAddedChildrenID = $(newAddedChildren).attr("data-customid");
 
-        
-        if(newAddedChildrenID==MostLikelyDivChildrenID || newAddedChildrenID==PossibleDivChildrenID)
-        {
-          Swal.fire("Duplicate Account")
+        var Fromitem = $(evt.from).attr("class");
+        var FromitemID = evt.from.id;
+        var FromitemDiv = document.getElementById(FromitemID);
+        if (FromitemID != "DestinationAccountList") {
+          if (Fromitem.includes("POSSIBLE")) {
+            Swal.fire("Can't move in other column");
+            FromitemDiv.appendChild(evt.to.children[0]);
+            // evt.to.removeChild(evt.to.children[0]);
+          }
+          if (Fromitem.includes("Most_Likely")) {
+            Swal.fire("Can't move in other column");
+            FromitemDiv.appendChild(evt.to.children[0]);
+            // evt.to.removeChild(evt.to.children[0]);
+          }
+        }
+
+        if (
+          newAddedChildrenID == MostLikelyDivChildrenID ||
+          newAddedChildrenID == PossibleDivChildrenID
+        ) {
+          Swal.fire("Duplicate Account");
           evt.to.removeChild(evt.to.children[0]);
+        } else {
+          if (evt.to.children.length > 1) {
+            var AlreadyPresentChildren = evt.to.children[1];
+            var AlreadyPresentChildrenID = $(AlreadyPresentChildren).data(
+              "customid"
+            );
 
-        }
-        else{
-        if (evt.to.children.length > 1) {
-          var AlreadyPresentChildren = evt.to.children[1];
-          var AlreadyPresentChildrenID = $(AlreadyPresentChildren).data("customid");
-          
-          
-
-          if(AlreadyPresentChildrenID==newAddedChildrenID){
-            Swal.fire("Duplicate Account")
-            evt.to.removeChild(evt.to.children[0]);
-          }
-          else{
-          var olditem = evt.to.children[1];
-          PossibleDIV.appendChild(olditem);
-          // evt.to.removeChild(evt.to.children[1]);
+            if (AlreadyPresentChildrenID == newAddedChildrenID) {
+              Swal.fire("Duplicate Account");
+              evt.to.removeChild(evt.to.children[0]);
+            } else {
+              var olditem = evt.to.children[1];
+              PossibleDIV.appendChild(olditem);
+              // evt.to.removeChild(evt.to.children[1]);
+            }
           }
         }
-      }
         if (PossibleDIV.children.length > 1) {
           PossibleDIV.removeChild(PossibleDIV.children[0]);
         }
@@ -446,7 +502,7 @@ $(document).ready(function () {
         MostLickely: $("#ML" + SourceAccountData[i].Number).html(),
         Lickely: $("#L" + SourceAccountData[i].Number).html(),
         Possible: $("#P" + SourceAccountData[i].Number).html(),
-        LastUpdate:getFormattedDate()
+        LastUpdate: getFormattedDate(),
       };
       AccountChartDetails.push(Dataobj);
     }
@@ -506,10 +562,13 @@ $(document).ready(function () {
     );
   }
 
-  $(document).on('click','.history',function(){
-    $("#HistoryModal").modal('show')
-   alert($(this).attr('data-sourceaccountnumber'))
-  })
+  $(document).on("click", ".history", function () {
+    $("#HistoryModal").modal("show");
+   Accountnumber=$(this).parent().parent().attr('id')
+
+    $("#AccountNameAndNumber").text(Accountnumber +"--")
+    // alert($(this).attr("data-sourceaccountnumber"));
+  });
 
   $("#ASSETSBTN").trigger("click");
 });
