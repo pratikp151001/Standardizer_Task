@@ -47,7 +47,7 @@ $(document).ready(function () {
         SourceAccountData[i].Number +
         " " +
         SourceAccountData[i].Name +
-        "</div><div class='icons'><i class='fa-solid fa-clock-rotate-left history'></i> <i class='bi bi-check2-all doubleRight'></i></div></div>";
+        "</div><div class='icons'><i class='fa-solid fa-clock-rotate-left history' data-sourceAccountNumber='"+SourceAccountData[i].Number +"'></i> <i class='bi bi-check2-all doubleRight'></i></div></div>";
       mostLickely +=
         "<div class='Item Most_Likely' id='ML" +
         SourceAccountData[i].Number +
@@ -112,7 +112,7 @@ $(document).ready(function () {
 
   function DataSourceAccountDisplay(AccType) {
     $.each($(".SourceDATA"), function () {
-      debugger
+      // debugger
       // debugger
 
       id = this.id;
@@ -276,7 +276,7 @@ $(document).ready(function () {
       // other Sortable.js options
     });
   });
-  console.log(P1002.children)
+  // console.log(P1002.children)
 
   // $.each($(".POSSIBLE"), function () {
   //   // id = "P"+this.id;
@@ -346,27 +346,6 @@ $(document).ready(function () {
     Sortable.create(div, {
       group: {
         name: "shared",
-        // put: function (to, from, dragEl, evt) {
-        //   if (to.el.children.length > 0) {
-        //     // Clone the existing item
-
-        //     var divID = div.id;
-
-        //     PossibledivID = divID.replace("L", "P");
-        //     // console.log(PossibledivID);
-
-        //     PossibleDIV = document.getElementById(PossibledivID);
-        //     oldItem = to.el.children[0].cloneNode(true);
-        //     console.log(oldItem);
-
-        //     to.el.removeChild(to.el.children[0]);
-        //     PossibleDIV.appendChild(oldItem);
-        //     if (PossibleDIV.children.length > 1) {
-        //       PossibleDIV.removeChild(PossibleDIV.children[0]);
-        //     }
-        //   }
-        //   return true;
-        // },
       },
       onAdd: function (evt) {
         // console.log(evt.to.children)
@@ -374,15 +353,23 @@ $(document).ready(function () {
         var divID = div.id;
 
         PossibledivID = divID.replace("L", "P");
+        MostLikelydivID = divID.replace("L", "ML");
         // console.log(PossibledivID);
 
         PossibleDIV = document.getElementById(PossibledivID);
+        MostLikelyDIV=document.getElementById(MostLikelydivID)
         if (evt.to.children.length > 1) {
           var AlreadyPresentChildren = evt.to.children[1];
           var AlreadyPresentChildrenID = $(AlreadyPresentChildren).data("customid");
           var newAddedChildren = evt.item;
           var newAddedChildrenID = $(newAddedChildren).attr("data-customid");
-          if(AlreadyPresentChildrenID==newAddedChildrenID){
+          var PossibleDivChildren=PossibleDIV.children[0]
+          var PossibleDivChildrenID=$(PossibleDivChildren).data("customid")
+
+          var MostLikelyDivChildren=MostLikelyDIV.children[0]
+          var MostLikelyDivChildrenID=$(MostLikelyDivChildren).data("customid")
+
+          if(AlreadyPresentChildrenID==newAddedChildrenID || newAddedChildrenID==PossibleDivChildrenID || newAddedChildrenID==MostLikelyDivChildrenID){
             Swal.fire("Duplicate Account")
             evt.to.removeChild(evt.to.children[0]);
           }
@@ -410,6 +397,7 @@ $(document).ready(function () {
         MostLickely: $("#ML" + SourceAccountData[i].Number).html(),
         Lickely: $("#L" + SourceAccountData[i].Number).html(),
         Possible: $("#P" + SourceAccountData[i].Number).html(),
+        LastUpdate:getFormattedDate()
       };
       AccountChartDetails.push(Dataobj);
     }
@@ -426,6 +414,7 @@ $(document).ready(function () {
   //  Get Data From Local Storage
   var AccountChartsData = JSON.parse(localStorage.getItem("AccountChartData"));
   if (AccountChartsData) {
+    $("#lastUpdate").text("Last Updated on" + AccountChartsData[0].LastUpdate);
     for (let i = 0; i < AccountChartsData.length; i++) {
       if (
         AccountChartsData[i].Lickely != "" ||
@@ -467,6 +456,11 @@ $(document).ready(function () {
       month + "-" + day + "-" + year + " at " + time + ":" + minutes + ampm
     );
   }
+
+  $(document).on('click','.history',function(){
+    $("#HistoryModal").modal('show')
+   alert($(this).attr('data-sourceaccountnumber'))
+  })
 
   $("#ASSETSBTN").trigger("click");
 });
