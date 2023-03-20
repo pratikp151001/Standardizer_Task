@@ -6,7 +6,7 @@ $(document).ready(function () {
     });
   });
 
-  //DEstinationData
+  //DEstinationData------------
   var destinationData;
   const xhttp = new XMLHttpRequest();
   xhttp.onload = function () {
@@ -43,6 +43,8 @@ $(document).ready(function () {
         SourceAccountData[i].Number +
         "' data-type='" +
         SourceAccountData[i].Type +
+        "' data-accountname='" +
+        SourceAccountData[i].Name +
         "'> <div class='sourceNameNumber'>" +
         SourceAccountData[i].Number +
         " " +
@@ -62,14 +64,6 @@ $(document).ready(function () {
         "<div class='Item POSSIBLE' id='P" +
         SourceAccountData[i].Number +
         "' ></div>";
-
-      // new Sortable($(`#ML${SourceAccountData[i].Number}`), {
-      //   group: {
-      //     name: "shared",
-      //     pull: "true", // To clone: set pull to 'clone'
-      //   },
-      //   animation: 150,
-      // });
     }
   }
   $("#SourceAccountList").html(list);
@@ -100,6 +94,7 @@ $(document).ready(function () {
   $(".horizontalDesBtn").click(function () {
     $(".horizontalDesBtn").removeClass("activeHorizontalbtn");
     $(this).addClass("activeHorizontalbtn");
+    $("#Searchbtn").val("");
     let clickedHorizontalBtn = $(this).data("value").toUpperCase();
     //alert(clickedHorizontalBtn)
     DataDestination(clickedHorizontalBtn);
@@ -133,7 +128,9 @@ $(document).ready(function () {
       //   },
       //   animation: 150,
       // });
-      if (Account_Type.toUpperCase().trim() == AccType.toUpperCase().trim()) {
+      if (
+        Account_Type.toUpperCase().trim().includes(AccType.toUpperCase().trim())
+      ) {
         // console.log("ascfa", SourceAccountData[i].Type.toUpperCase())
         // console.log(AccType.toUpperCase())
 
@@ -215,28 +212,7 @@ $(document).ready(function () {
     sort: false,
   });
 
-  // new Sortable(P1003, {
-  //   group: {
-  //     name: "shared",
-  //     pull: "true", // To clone: set pull to 'clone'
-  //   },
-  //   animation: 150,
-  // });
-  // var divs = document.querySelectorAll("#DestinationAccountList div.DESDATA");
-  // console.log(divs)
-  // divs.forEach(function (div) {
-  //   debugger
-  //   console.log(div)
-  //   Sortable.create(div, {
-  //     group: {
-  //       name: "shared",
-  //       pull: "clone",
-  //     },
-  //     animation: 150,
-  //     // other Sortable.js options
-  //   });
-  // });
-
+  
   var divs = document.querySelectorAll("div.POSSIBLE");
   divs.forEach(function (div) {
     Sortable.create(div, {
@@ -267,24 +243,53 @@ $(document).ready(function () {
 
         var Fromitem = $(evt.from).attr("class");
         var FromitemID = evt.from.id;
+        console.log(FromitemID, div.id);
+
         var FromitemDiv = document.getElementById(FromitemID);
         if (FromitemID != "DestinationAccountList") {
           if (Fromitem.includes("LIKELY")) {
-            Swal.fire("Can't move in other column");
+            //  if(LikelyDivID==FromitemID){
+            //   alert("AF")
+            //   // console.log(evt.to.children[0])
+            //   // console.log(evt.to.children[1])
+            //   FromitemDiv.appendChild(evt.to.children[1]);
+            //  }
+            //  else{
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "you cant move accounts in other column!",
+            });
             FromitemDiv.appendChild(evt.to.children[0]);
             // evt.to.removeChild(evt.to.children[0]);
+            //  }
           }
           if (Fromitem.includes("Most_Likely")) {
-            Swal.fire("Can't move in other column");
+            // if(MOSTLikelyDivID==FromitemID){
+            //   alert("AFS")
+            //   // console.log(evt.to.children[0])
+            //   // console.log(evt.to.children[1])
+            //   FromitemDiv.appendChild(evt.to.children[1]);
+            //  }else{
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "you cant move accounts in other column!",
+            });
             FromitemDiv.appendChild(evt.to.children[0]);
             // evt.to.removeChild(evt.to.children[0]);
+            //  }
           }
         }
         if (
           newAddedChildrenID == LikelyDivChildrenID ||
           newAddedChildrenID == MOSTLikelyDivChildrenID
         ) {
-          Swal.fire("Duplicate Account");
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Account is already present in the row",
+          });
           evt.to.removeChild(evt.to.children[0]);
         } else {
           if (evt.to.children.length > 1) {
@@ -294,7 +299,11 @@ $(document).ready(function () {
             );
 
             if (newAddedChildrenID == AlreadyPresentChildrenID) {
-              Swal.fire("Duplicate Account");
+              Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Account is already present in the row",
+              });
               evt.to.removeChild(evt.to.children[0]);
             } else {
               // console.log("WDFEWFVRVRF")
@@ -308,28 +317,6 @@ $(document).ready(function () {
       // other Sortable.js options
     });
   });
-  // console.log(P1002.children)
-
-  // $.each($(".POSSIBLE"), function () {
-  //   // id = "P"+this.id;
-  //   // console.log(typeof(id))
-
-  //   new Sortable(this, {
-  //     group: {
-  //       name: "shared",
-  //       put: function (to, from, dragEl, evt) {
-  //         // Remove any existing items in the droppable area
-  //         if (to.el.children.length > 0) {
-  //           to.el.removeChild(to.el.children[0]);
-  //         }
-
-  //         // Allow the item to be dropped
-  //         return true;
-  //       }, // To clone: set pull to 'clone'
-  //     },
-  //     animation: 150,
-  //   });
-  // });
 
   var divs = document.querySelectorAll("div.Most_Likely");
   divs.forEach(function (div) {
@@ -366,13 +353,21 @@ $(document).ready(function () {
         var FromitemDiv = document.getElementById(FromitemID);
         if (FromitemID != "DestinationAccountList") {
           if (Fromitem.includes("LIKELY")) {
-            Swal.fire("Can't move in other column");
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "you cant move accounts in other column!",
+            });
             FromitemDiv.appendChild(evt.to.children[0]);
             // evt.to.removeChild(evt.to.children[0]);
           }
 
           if (Fromitem.includes("POSSIBLE")) {
-            Swal.fire("Can't move in other column");
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "you cant move accounts in other column!",
+            });
             FromitemDiv.appendChild(evt.to.children[0]);
             // evt.to.removeChild(evt.to.children[0]);
           }
@@ -381,7 +376,11 @@ $(document).ready(function () {
           newAddedChildrenID == LikelyDivChildrenID ||
           newAddedChildrenID == PossibleDivChildrenID
         ) {
-          Swal.fire("Duplicate Acoount");
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Account is already present in the row",
+          });
           evt.to.removeChild(evt.to.children[0]);
         } else {
           if (evt.to.children.length > 1) {
@@ -392,7 +391,11 @@ $(document).ready(function () {
             // console.log(AlreadyPresentChildrenID)
 
             if (AlreadyPresentChildrenID == newAddedChildrenID) {
-              Swal.fire("Duplicate Acoount");
+              Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Account is already present in the row",
+              });
               evt.to.removeChild(evt.to.children[0]);
             } else {
               var oldMostLikelyitem = evt.to.children[1];
@@ -450,12 +453,20 @@ $(document).ready(function () {
         var FromitemDiv = document.getElementById(FromitemID);
         if (FromitemID != "DestinationAccountList") {
           if (Fromitem.includes("POSSIBLE")) {
-            Swal.fire("Can't move in other column");
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "you cant move accounts in other column!",
+            });
             FromitemDiv.appendChild(evt.to.children[0]);
             // evt.to.removeChild(evt.to.children[0]);
           }
           if (Fromitem.includes("Most_Likely")) {
-            Swal.fire("Can't move in other column");
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "you cant move accounts in other column!",
+            });
             FromitemDiv.appendChild(evt.to.children[0]);
             // evt.to.removeChild(evt.to.children[0]);
           }
@@ -465,7 +476,11 @@ $(document).ready(function () {
           newAddedChildrenID == MostLikelyDivChildrenID ||
           newAddedChildrenID == PossibleDivChildrenID
         ) {
-          Swal.fire("Duplicate Account");
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Account is already present in the row",
+          });
           evt.to.removeChild(evt.to.children[0]);
         } else {
           if (evt.to.children.length > 1) {
@@ -475,7 +490,11 @@ $(document).ready(function () {
             );
 
             if (AlreadyPresentChildrenID == newAddedChildrenID) {
-              Swal.fire("Duplicate Account");
+              Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Account is already present in the row",
+              });
               evt.to.removeChild(evt.to.children[0]);
             } else {
               var olditem = evt.to.children[1];
@@ -497,6 +516,12 @@ $(document).ready(function () {
   $(document).on("click", "#submitbtn", function () {
     var AccountChartDetails = new Array();
     for (let i = 0; i < SourceAccountData.length; i++) {
+      // f=SourceAccountData[i].Number
+      // console.log(f)
+      //  var a= $("#ML" + SourceAccountData[i].Number).html()
+      //  console.log(a,SourceAccountData[i].Number)
+      // var r=$(`#ML${SourceAccountData[i].Number} #${SourceAccountData[i].Number}`)
+      // console.log(r)
       var Dataobj = {
         id: SourceAccountData[i].Number,
         MostLickely: $("#ML" + SourceAccountData[i].Number).html(),
@@ -504,6 +529,7 @@ $(document).ready(function () {
         Possible: $("#P" + SourceAccountData[i].Number).html(),
         LastUpdate: getFormattedDate(),
       };
+
       AccountChartDetails.push(Dataobj);
     }
 
@@ -514,6 +540,8 @@ $(document).ready(function () {
 
     DATE = getFormattedDate();
     $("#lastUpdate").text("Last Updated on " + DATE);
+
+    Swal.fire("Good job!", "Data Submited successfully!", "success");
   });
 
   //  Get Data From Local Storage
@@ -555,7 +583,7 @@ $(document).ready(function () {
       ampm = "am";
     }
 
-    console.log(time, minutes, ampm);
+    // console.log(time, minutes, ampm);
 
     return (
       month + "-" + day + "-" + year + " at " + time + ":" + minutes + ampm
@@ -564,9 +592,11 @@ $(document).ready(function () {
 
   $(document).on("click", ".history", function () {
     $("#HistoryModal").modal("show");
-   Accountnumber=$(this).parent().parent().attr('id')
+    Accountnumber = $(this).parent().parent().attr("id");
+    Accountname = $(this).parent().parent().attr("data-accountname");
+    //  console.log(Accountname)
 
-    $("#AccountNameAndNumber").text(Accountnumber +"--")
+    $("#AccountNameAndNumber").text(Accountnumber + "--" + Accountname);
     // alert($(this).attr("data-sourceaccountnumber"));
   });
 

@@ -1,4 +1,10 @@
-
+/* .mainbody{
+   height: 100px;
+} */
+.d-flex{
+    padding-right: 0% !important;
+    margin: 0%;
+}
 .SourceDATA{
     display: flex;
 }
@@ -109,10 +115,21 @@ overflow-x: hidden;
     margin-left: 2%;
 }
 .columns{
-    width: 18%;
+    width: 23%;
 }
 
-
+div#headingpossible {
+    width: 98% !important;
+}
+ul#Desbuttonslist {
+    margin-bottom: 0%;
+}
+li {
+    height: 40px;
+}
+.Most_Likely,.LIKELY,.POSSIBLE{
+    margin-bottom: 2.9% !important;
+}
 .heading{
     font-weight: bold;
     color: white;
@@ -120,7 +137,7 @@ overflow-x: hidden;
     padding-left: 1%;
     border-radius: 4px;
     padding-top: 2.5%;
-    padding-bottom: 2%;
+    padding-bottom: 3%;
 }
 #headingSourceAccount{
     background-color:rgb(60,183,231) ;
@@ -130,6 +147,9 @@ overflow-x: hidden;
 .humanUpdate{
     color: rgb(218, 148, 19);
     margin-left: 2%;
+}
+pre{
+    font-size: 1.1rem !important;
 }
 
 ul {
@@ -147,10 +167,11 @@ ul {
     max-width:100%;
     padding: 3%;
     border-radius: 4px;
-    height: 40px;
+    height: 41px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    cursor: pointer;
 }
 #SourceAccountList{
     margin-top: 2%;
@@ -160,11 +181,12 @@ ul {
     margin-right: 0% !important;
   } */
 .DropArea{
-    width: 60%;
+    width: 50%;
+    padding: 0% !important;
 }
 #headingMostlikely,#headinglikely,#headingpossible{
     width: 95%;
-    margin-bottom: 2% !important;
+    margin-bottom: 3.2% !important;
 }
 #headingMostlikely{
     background-color: #00c0cd;
@@ -195,7 +217,12 @@ ul {
     background-position-y: center;
 
 }
-
+img{
+    cursor: auto;
+}
+button:focus {
+    outline: white 3px auto;
+  }
 .Possible,.Lickely,.Mlickely{
     width: 100%;
    max-width: 33%;
@@ -227,7 +254,7 @@ button#forwordbtn {
     padding-top: 5px;
 }
 .POSSIBLE{
-    margin-right: 4%;
+    margin-right: 2%;
 }
 button#backwordbtn {
     padding-top: 6px;
@@ -236,9 +263,10 @@ button#backwordbtn {
  position: absolute;
  } */
  .horizontalDesBtn{
-    padding-left: 10px;
+    padding-left: 5px;
     padding-top: 5px;
     padding-bottom: 8px;
+    margin-left: 15px;
  }
  .horizontalDesBtn,#forwordbtn,#backwordbtn{
     background-color: white;
@@ -253,7 +281,7 @@ button#backwordbtn {
  }
  .Destinationbtns #forwordbtn, .Destinationbtns #backwordbtn {
     position: absolute;
-    height: 38px;
+    height: 40px;
     width: 33px;
 }
  #backwordbtn {
@@ -270,6 +298,7 @@ button#backwordbtn {
  }
  .history{
     float: right;
+    cursor: pointer;
     
  }
  .doubleRight{
