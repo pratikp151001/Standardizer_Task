@@ -219,13 +219,20 @@ $(document).ready(function () {
       group: {
         name: "shared",
       },
+      // stop: function(event, ui) {
+      //   if (!$(ui.helper).closest("#sortable").length) {
+      //     $(ui.item).remove();
+      //   }
+      // },
       onAdd: function (evt) {
         evt.to.children[0].classList.remove("Item");
 
-        console.log(evt.from);
+        // console.log(evt.from);
 
         var newAddedChildren = evt.item;
         var PossibleDivID = div.id;
+        var SourceAccountID=PossibleDivID.replace("P", "");
+        console.log(SourceAccountID)
         var LikelyDivID = PossibleDivID.replace("P", "L");
         var LikelyDiv = document.getElementById(LikelyDivID);
         var LikelyDivChildren = LikelyDiv.children[0];
@@ -243,7 +250,7 @@ $(document).ready(function () {
 
         var Fromitem = $(evt.from).attr("class");
         var FromitemID = evt.from.id;
-        console.log(FromitemID, div.id);
+        // console.log(FromitemID, div.id);
 
         var FromitemDiv = document.getElementById(FromitemID);
         if (FromitemID != "DestinationAccountList") {
@@ -516,12 +523,7 @@ $(document).ready(function () {
   $(document).on("click", "#submitbtn", function () {
     var AccountChartDetails = new Array();
     for (let i = 0; i < SourceAccountData.length; i++) {
-      // f=SourceAccountData[i].Number
-      // console.log(f)
-      //  var a= $("#ML" + SourceAccountData[i].Number).html()
-      //  console.log(a,SourceAccountData[i].Number)
-      // var r=$(`#ML${SourceAccountData[i].Number} #${SourceAccountData[i].Number}`)
-      // console.log(r)
+     
       var Dataobj = {
         id: SourceAccountData[i].Number,
         MostLickely: $("#ML" + SourceAccountData[i].Number).html(),

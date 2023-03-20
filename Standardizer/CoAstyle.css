@@ -64,7 +64,8 @@ overflow-x: hidden;
     background-color: rgb(218, 216, 216) !important;
     font-weight: bold !important;
     color: gray !important;
-    box-shadow:  2px 2px 5px rgb(218, 218, 218);;
+    box-shadow:  2px 2px 5px rgb(218, 218, 218);
+    /* box-shadow: 0 0 0 1rem rgba(53, 53, 53, 0.25); */
 }
 .sourceNameNumber{
     width: 70%;
@@ -115,7 +116,7 @@ overflow-x: hidden;
     margin-left: 2%;
 }
 .columns{
-    width: 23%;
+    width: 21%;
 }
 
 div#headingpossible {
@@ -181,7 +182,7 @@ ul {
     margin-right: 0% !important;
   } */
 .DropArea{
-    width: 50%;
+    width: 54%;
     padding: 0% !important;
 }
 #headingMostlikely,#headinglikely,#headingpossible{
@@ -223,6 +224,14 @@ img{
 button:focus {
     outline: white 3px auto;
   }
+  .form-control:focus {
+    color: #212529;
+    background-color: #fff;
+    border-color: gray !important;
+    outline: 0;
+    box-shadow: none !important;
+}
+/* box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25); */
 .Possible,.Lickely,.Mlickely{
     width: 100%;
    max-width: 33%;
