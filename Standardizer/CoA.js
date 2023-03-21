@@ -51,7 +51,9 @@ $(document).ready(function () {
         SourceAccountData[i].Name +
         "</div><div class='icons'><i class='fa-solid fa-clock-rotate-left history ms-2 mt-1' data-sourceAccountNumber='" +
         SourceAccountData[i].Number +
-        "'></i> <i class='bi bi-check2-all doubleRight ms-2'></i></div></div>";
+        "'></i> <i class='bi bi-check2-all doubleRight ms-2' id='S" +
+        SourceAccountData[i].Number +
+        "'></i></div></div>";
       mostLickely +=
         "<div class='Item Most_Likely' id='ML" +
         SourceAccountData[i].Number +
@@ -231,8 +233,10 @@ $(document).ready(function () {
 
         var newAddedChildren = evt.item;
         var PossibleDivID = div.id;
-        var SourceAccountID=PossibleDivID.replace("P", "");
-        console.log(SourceAccountID)
+        var SourceAccountRightTickID=PossibleDivID.replace("P", "S");
+        SourceAccountRightTick=document.getElementById(SourceAccountRightTickID)
+        $(SourceAccountRightTick).css("color", "blue");
+        // $(SourceAccountID).css("color","blue")
         var LikelyDivID = PossibleDivID.replace("P", "L");
         var LikelyDiv = document.getElementById(LikelyDivID);
         var LikelyDivChildren = LikelyDiv.children[0];
@@ -337,7 +341,9 @@ $(document).ready(function () {
         evt.to.children[0].classList.remove("Item");
         // console.log(evt.to.children)
         var divID = div.id;
-
+        var SourceAccountRightTickID=divID.replace("ML", "S");
+        SourceAccountRightTick=document.getElementById(SourceAccountRightTickID)
+        $(SourceAccountRightTick).css("color", "blue");
         LikelydivID = divID.replace("ML", "L");
 
         PossibledivID = divID.replace("ML", "P");
@@ -440,7 +446,9 @@ $(document).ready(function () {
         // console.log(evt.to.children)
         evt.to.children[0].classList.remove("Item");
         var divID = div.id;
-
+        var SourceAccountRightTickID=divID.replace("L", "S");
+        SourceAccountRightTick=document.getElementById(SourceAccountRightTickID)
+        $(SourceAccountRightTick).css("color", "blue");
         PossibledivID = divID.replace("L", "P");
         MostLikelydivID = divID.replace("L", "ML");
         PossibleDIV = document.getElementById(PossibledivID);
