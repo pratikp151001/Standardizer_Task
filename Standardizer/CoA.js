@@ -569,6 +569,10 @@ $(document).ready(function () {
         );
         $("#L" + AccountChartsData[i].id).html(AccountChartsData[i].Lickely);
         $("#P" + AccountChartsData[i].id).html(AccountChartsData[i].Possible);
+           
+        var rightTickID="S"+AccountChartsData[i].id
+        SourceAccountRightTick=document.getElementById(rightTickID)
+        $(SourceAccountRightTick).css("color", "blue");
       }
     }
   }
