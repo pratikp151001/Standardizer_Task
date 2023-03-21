@@ -235,7 +235,7 @@ $(document).ready(function () {
         var PossibleDivID = div.id;
         var SourceAccountRightTickID=PossibleDivID.replace("P", "S");
         SourceAccountRightTick=document.getElementById(SourceAccountRightTickID)
-        $(SourceAccountRightTick).css("color", "blue");
+        $(SourceAccountRightTick).css("color", "rgb(111,204,240)");
         // $(SourceAccountID).css("color","blue")
         var LikelyDivID = PossibleDivID.replace("P", "L");
         var LikelyDiv = document.getElementById(LikelyDivID);
@@ -262,7 +262,7 @@ $(document).ready(function () {
         // console.log(element)
         var divInSource=desTinationelement[desTinationelement.length-1]
         // console.log(divInSource)
-        $(divInSource).css("color", "blue");
+        $(divInSource).css("color", "rgb(13,157,102)");
         if (FromitemID != "DestinationAccountList") {
           if (Fromitem.includes("LIKELY")) {
             //  if(LikelyDivID==FromitemID){
@@ -350,7 +350,7 @@ $(document).ready(function () {
         var divID = div.id;
         var SourceAccountRightTickID=divID.replace("ML", "S");
         SourceAccountRightTick=document.getElementById(SourceAccountRightTickID)
-        $(SourceAccountRightTick).css("color", "blue");
+        $(SourceAccountRightTick).css("color", "rgb(111,204,240)");
         LikelydivID = divID.replace("ML", "L");
 
         PossibledivID = divID.replace("ML", "P");
@@ -376,7 +376,7 @@ $(document).ready(function () {
         // console.log(element)
         var divInSource=desTinationelement[desTinationelement.length-1]
         // console.log(divInSource)
-        $(divInSource).css("color", "blue");
+        $(divInSource).css("color", "rgb(13,157,102)");
         if (FromitemID != "DestinationAccountList") {
           if (Fromitem.includes("LIKELY")) {
             Swal.fire({
@@ -462,7 +462,7 @@ $(document).ready(function () {
         var divID = div.id;
         var SourceAccountRightTickID=divID.replace("L", "S");
         SourceAccountRightTick=document.getElementById(SourceAccountRightTickID)
-        $(SourceAccountRightTick).css("color", "blue");
+        $(SourceAccountRightTick).css("color", "rgb(111,204,240)");
         PossibledivID = divID.replace("L", "P");
         MostLikelydivID = divID.replace("L", "ML");
         PossibleDIV = document.getElementById(PossibledivID);
@@ -484,7 +484,7 @@ $(document).ready(function () {
         // console.log(element)
         var divInSource=desTinationelement[desTinationelement.length-1]
         // console.log(divInSource)
-        $(divInSource).css("color", "blue");
+        $(divInSource).css("color", "rgb(13,157,102)");
 
         if (FromitemID != "DestinationAccountList") {
           if (Fromitem.includes("POSSIBLE")) {
@@ -589,10 +589,12 @@ $(document).ready(function () {
         );
         $("#L" + AccountChartsData[i].id).html(AccountChartsData[i].Lickely);
         $("#P" + AccountChartsData[i].id).html(AccountChartsData[i].Possible);
-           
+
+       
+
         var rightTickID="S"+AccountChartsData[i].id
         SourceAccountRightTick=document.getElementById(rightTickID)
-        $(SourceAccountRightTick).css("color", "blue");
+        $(SourceAccountRightTick).css("color", "rgb(111,204,240)");
       }
     }
   }
