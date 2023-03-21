@@ -228,7 +228,7 @@ $(document).ready(function () {
       // },
       onAdd: function (evt) {
         evt.to.children[0].classList.remove("Item");
-
+        evt.to.children[0].classList.add("ToMakeBlue");
         // console.log(evt.from);
 
         var newAddedChildren = evt.item;
@@ -257,6 +257,12 @@ $(document).ready(function () {
         // console.log(FromitemID, div.id);
 
         var FromitemDiv = document.getElementById(FromitemID);
+        // console.log(newAddedChildrenID)
+        var desTinationelement = $('[data-customid='+ newAddedChildrenID+']');
+        // console.log(element)
+        var divInSource=desTinationelement[desTinationelement.length-1]
+        // console.log(divInSource)
+        $(divInSource).css("color", "blue");
         if (FromitemID != "DestinationAccountList") {
           if (Fromitem.includes("LIKELY")) {
             //  if(LikelyDivID==FromitemID){
@@ -339,6 +345,7 @@ $(document).ready(function () {
         console.log(evt.from);
         // var mostLikelyItem = evt.to.children[0];
         evt.to.children[0].classList.remove("Item");
+        evt.to.children[0].classList.add("ToMakeBlue");
         // console.log(evt.to.children)
         var divID = div.id;
         var SourceAccountRightTickID=divID.replace("ML", "S");
@@ -364,6 +371,12 @@ $(document).ready(function () {
         var Fromitem = $(evt.from).attr("class");
         var FromitemID = evt.from.id;
         var FromitemDiv = document.getElementById(FromitemID);
+        
+        var desTinationelement = $('[data-customid='+ newAddedChildrenID+']');
+        // console.log(element)
+        var divInSource=desTinationelement[desTinationelement.length-1]
+        // console.log(divInSource)
+        $(divInSource).css("color", "blue");
         if (FromitemID != "DestinationAccountList") {
           if (Fromitem.includes("LIKELY")) {
             Swal.fire({
@@ -445,6 +458,7 @@ $(document).ready(function () {
       onAdd: function (evt) {
         // console.log(evt.to.children)
         evt.to.children[0].classList.remove("Item");
+        evt.to.children[0].classList.add("ToMakeBlue");
         var divID = div.id;
         var SourceAccountRightTickID=divID.replace("L", "S");
         SourceAccountRightTick=document.getElementById(SourceAccountRightTickID)
@@ -466,6 +480,12 @@ $(document).ready(function () {
         var Fromitem = $(evt.from).attr("class");
         var FromitemID = evt.from.id;
         var FromitemDiv = document.getElementById(FromitemID);
+        var desTinationelement = $('[data-customid='+ newAddedChildrenID+']');
+        // console.log(element)
+        var divInSource=desTinationelement[desTinationelement.length-1]
+        // console.log(divInSource)
+        $(divInSource).css("color", "blue");
+
         if (FromitemID != "DestinationAccountList") {
           if (Fromitem.includes("POSSIBLE")) {
             Swal.fire({
@@ -588,7 +608,7 @@ $(document).ready(function () {
     day = day.length > 1 ? day : "0" + day;
 
     var time = parseInt(date.getHours());
-    var minutes = date.getMinutes();
+    var minutes = parseInt(date.getMinutes());
     var ampm;
     if (time > 12) {
       ampm = "pm";
@@ -596,7 +616,9 @@ $(document).ready(function () {
     } else {
       ampm = "am";
     }
-
+     if(minutes<10){
+      minutes="0"+minutes
+     }
     // console.log(time, minutes, ampm);
 
     return (

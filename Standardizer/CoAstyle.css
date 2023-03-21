@@ -118,6 +118,9 @@ overflow-x: hidden;
 .columns{
     width: 21%;
 }
+.ToMakeBlue{
+    color: black !important;
+}
 
 div#headingpossible {
     width: 98% !important;
