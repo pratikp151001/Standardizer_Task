@@ -11,7 +11,7 @@
 .upperbuttons{
     background-color: white;
     position: sticky;
-    top: 74px;
+    top: 66px;
     height: 75px;
     z-index: 98;
     padding-top: 1%;
@@ -23,8 +23,8 @@ overflow-x: hidden;
     padding-right: 0% !important;
 } */
 #profileImage{
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     margin-right: 10%;
 }
@@ -43,14 +43,15 @@ overflow-x: hidden;
   }
   .stickyHeading{
     position: sticky !important;
-    top: 148px;
+    top: 140px;
     z-index: 99;
   }
 .navItemdiv {
     margin-left: 7%;
 }
 #companylogo{
-    width: 150px;
+    width: 140px;
+    height: 40px;
 }
 .nav-item{
     margin-right:x ;
@@ -63,7 +64,7 @@ overflow-x: hidden;
 .accountTypebtn{
     background-color: rgb(218, 216, 216) !important;
     font-weight: bold !important;
-    color: gray !important;
+    color: rgb(137, 136, 136) !important;
     box-shadow:  2px 2px 5px rgb(218, 218, 218);
     /* box-shadow: 0 0 0 1rem rgba(53, 53, 53, 0.25); */
 }
@@ -113,7 +114,7 @@ overflow-x: hidden;
     font-size: 1rem;
 }
 #MostlikelyTopheading{
-    margin-left: 2%;
+    margin-left: 1.6%;
 }
 .columns{
     width: 21%;
@@ -135,10 +136,10 @@ li {
     margin-bottom: 2.4% !important;
 }
 .heading{
-    font-weight: bold;
+    font-weight: 500;
     color: white;
     padding: 0.3% 1%;
-    padding-left: 1%;
+    padding-left: 3%;
     border-radius: 4px;
     padding-top: 2.5%;
     padding-bottom: 3%;
@@ -270,6 +271,7 @@ button#forwordbtn {
 }
 button#backwordbtn {
     padding-top: 6px;
+    margin-top: 3px;
 }
 /* .Destinationbtns #forwordbtn{
  position: absolute;
@@ -278,12 +280,12 @@ button#backwordbtn {
     padding-left: 5px;
     padding-top: 5px;
     padding-bottom: 8px;
-    margin-left: 15px;
+    margin-left: 15 px;
  }
  .horizontalDesBtn,#forwordbtn,#backwordbtn{
     background-color: white;
     border: none;
-    font-weight: bold;
+    font-weight: 500;
     height: auto;
  }
  .Destinationbtns{
